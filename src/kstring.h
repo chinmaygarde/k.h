@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdarg.h>
 #include <stddef.h>
 #include "kmacros.h"
 
@@ -10,6 +11,8 @@ typedef struct KString* KStringRef;
 
 KPRINTF_FORMAT(1, 2)
 KStringRef KStringAllocWithFormat(const char* format, ...);
+
+KStringRef KStringAllocWithFormatV(const char* format, va_list args);
 
 void KStringRetain(KStringRef);
 

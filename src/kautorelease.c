@@ -21,11 +21,11 @@ size_t KAutoreleasePoolPop() {
   return KArrayRemoveAllObjects(tPool);
 }
 
-bool KAutoreleaseMove(KObjectRef obj) {
+KObjectRef KAutoreleaseMove(KObjectRef obj) {
   bool added = KAutoreleasePoolAddObject(obj);
-  if (!added) {
-    return false;
-  }
   KObjectRelease(obj);
-  return true;
+  if (!added) {
+    return NULL;
+  }
+  return obj;
 }

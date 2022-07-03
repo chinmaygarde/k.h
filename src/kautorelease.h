@@ -8,7 +8,7 @@ KEXTERN_C_BEGIN
 
 bool KAutoreleasePoolAddObject(KObjectRef obj);
 
-bool KAutoreleaseMove(KObjectRef obj);
+KObjectRef KAutoreleaseMove(KObjectRef obj);
 
 size_t KAutoreleasePoolPop();
 

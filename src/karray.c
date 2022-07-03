@@ -34,7 +34,6 @@ KArrayRef KArrayAlloc() {
 
 bool KArrayAddObject(KArrayRef array, KObjectRef object) {
   if (!array || !object) {
-    printf("Hello\n");
     return false;
   }
   if (!KAllocationTruncate(array->items,

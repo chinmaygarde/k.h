@@ -145,3 +145,17 @@ TEST(KObjectTest, KARP) {
   ASSERT_EQ(alloc_count, 1u);
   ASSERT_EQ(dealloc_count, 1u);
 }
+
+TEST(KObjectTest, KLogging) {
+  KLog(KLogLevelInfo, "Hello");
+  KLog(KLogLevelInfo, "%s", "Hello Info");
+  KLog(KLogLevelWarning, "%s", "Hello Warning");
+  KLog(KLogLevelError, "%s", "Hello Error");
+  K_LOG_INFO("Hi!");
+  K_LOG_INFO("%s", "Hi! Info");
+  K_LOG_WARNING("%s", "Hi! Warn");
+  K_LOG_ERROR("%s", "Hi! Err");
+  K_DLOG_INFO("%s", "Hi! Info DEBUG");
+  K_DLOG_WARNING("%s", "Hi! Warn DEBUG");
+  K_DLOG_ERROR("%s", "Hi! Err DEBUG");
+}

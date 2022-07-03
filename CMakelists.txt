@@ -18,8 +18,12 @@ add_library(kobject
   src/kallocation.h
   src/karray.c
   src/karray.h
+  src/kassert.c
+  src/kassert.h
   src/kautorelease.c
   src/kautorelease.h
+  src/klogging.c
+  src/klogging.h
   src/kmacros.h
   src/kobject.c
   src/kobject.h
