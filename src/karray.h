@@ -24,4 +24,6 @@ void KArrayRetain(KArrayRef array);
 
 void KArrayRelease(KArrayRef array);
 
+size_t KArrayRemoveAllObjects(KArrayRef array);
+
 KEXTERN_C_END

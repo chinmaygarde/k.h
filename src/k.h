@@ -2,6 +2,7 @@
 
 #include "kmacros.h"
 
+#include "kautorelease.h"
 #include "kobject.h"
 
 #include "kallocation.h"

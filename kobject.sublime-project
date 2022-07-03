@@ -4,7 +4,7 @@
       "name": "KObject Build All",
       "shell_cmd": "ninja && ./kobject_unittests",
       "working_dir": "${project_path}/build",
-      "file_regex": "(.*):([\\d]+):([\\d]+)?:? ?((?:error|warning|note): ?.*)",
+      "file_regex": "(.*):(\\d+):(\\d+)(.*)",
       "shell": true,
     }
   ],

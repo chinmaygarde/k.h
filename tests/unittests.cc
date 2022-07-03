@@ -117,3 +117,31 @@ TEST(KObjectTest, KArray) {
   ASSERT_EQ(dealloc_count, 2u);
   KArrayRelease(array);
 }
+
+TEST(KObjectTest, KARP) {
+  typedef struct MyStruct {
+  } MyStruct;
+
+  static uint32_t alloc_count;
+  static uint32_t dealloc_count;
+
+  alloc_count = 0;
+  dealloc_count = 0;
+
+  KClass my_class;
+  my_class.init = [](void*) { alloc_count++; };
+  my_class.deinit = [](void* obj) { dealloc_count++; };
+  my_class.size = sizeof(MyStruct);
+
+  KObjectRef object = KObjectAlloc(&my_class);
+  ASSERT_EQ(alloc_count, 1u);
+  ASSERT_EQ(dealloc_count, 0u);
+  ASSERT_EQ(KAutoreleasePoolPop(), 0u);
+  KAutoreleasePoolAddObject(object);
+  KObjectRelease(object);
+  ASSERT_EQ(alloc_count, 1u);
+  ASSERT_EQ(dealloc_count, 0u);
+  ASSERT_EQ(KAutoreleasePoolPop(), 1u);
+  ASSERT_EQ(alloc_count, 1u);
+  ASSERT_EQ(dealloc_count, 1u);
+}
