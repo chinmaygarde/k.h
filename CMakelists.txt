@@ -1,0 +1,40 @@
+cmake_minimum_required(VERSION 3.23)
+
+project(kobject C CXX)
+
+set(C_STANDARD 11)
+set(CXX_STANDARD 17)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+enable_testing()
+
+include(GoogleTest)
+
+add_subdirectory(third_party/googletest)
+
+add_library(kobject
+  src/k.h
+  src/kmacros.h
+  src/kobject.c
+  src/kobject.h
+  src/kstring.c
+  src/kstring.h
+)
+
+target_include_directories(kobject
+  PUBLIC
+    src
+)
+
+add_executable(kobject_unittests
+  tests/unittests.cc
+  tests/cinclude.c
+)
+
+target_link_libraries(kobject_unittests
+  PRIVATE
+    gtest_main
+    kobject
+)
+
+gtest_discover_tests(kobject_unittests)

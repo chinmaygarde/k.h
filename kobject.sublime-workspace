@@ -1,0 +1,1265 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"KClas",
+				"KClassDTor"
+			],
+			[
+				"uint",
+				"uint8_t"
+			],
+			[
+				"My",
+				"MyDTor"
+			],
+			[
+				"Kobj",
+				"KObjectGetRetainCount"
+			],
+			[
+				"KOjb",
+				"KObjectRelease"
+			],
+			[
+				"size",
+				"size_t"
+			],
+			[
+				"K",
+				"KObject"
+			],
+			[
+				"Ko",
+				"KObjectPtr"
+			],
+			[
+				"KObj",
+				"KObjectPtr"
+			],
+			[
+				"stda",
+				"stdatomic.h>"
+			],
+			[
+				"std",
+				"stdint.h>"
+			],
+			[
+				"c",
+				"cflags"
+			],
+			[
+				"EXIT",
+				"EXIT_SUCCESS"
+			],
+			[
+				"current",
+				"current_depth_value"
+			],
+			[
+				"rotat",
+				"rotation_degrees"
+			],
+			[
+				"mat",
+				"mat4"
+			],
+			[
+				"vec",
+				"vec3"
+			],
+			[
+				"ma",
+				"mat4"
+			],
+			[
+				"matr",
+				"matrix_transform.hpp>"
+			],
+			[
+				"Draw",
+				"DrawTriangle"
+			],
+			[
+				"p",
+				"p_y"
+			],
+			[
+				"Vec",
+				"Vec3F"
+			],
+			[
+				"Ve",
+				"Vec3F"
+			],
+			[
+				"attr",
+				"attrib_"
+			],
+			[
+				"Dra",
+				"DrawLine"
+			],
+			[
+				"k",
+				"kColorBlack"
+			],
+			[
+				"ima",
+				"image.h\""
+			],
+			[
+				"sf",
+				"sft_lib"
+			],
+			[
+				"sft",
+				"sft_lib"
+			],
+			[
+				"add_lib",
+				"add_library"
+			],
+			[
+				"operato",
+				"operator-"
+			],
+			[
+				"kColor",
+				"kColorBlack"
+			],
+			[
+				"D",
+				"DrwaTriangle"
+			],
+			[
+				"mod",
+				"model.h\""
+			],
+			[
+				"Load",
+				"LoadObj"
+			],
+			[
+				"load",
+				"LoadObj"
+			],
+			[
+				"ar",
+				"argv"
+			],
+			[
+				"imag",
+				"image.h\""
+			],
+			[
+				"red",
+				"renderer.h\""
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"get",
+				"GetHeight"
+			],
+			[
+				"im",
+				"image_"
+			],
+			[
+				"tex",
+				"texture_deleter"
+			],
+			[
+				"SDL_Createsurfa",
+				"SDL_CreateRGBSurfaceFrom"
+			],
+			[
+				"SDL_Displa",
+				"SDL_DisplayData"
+			],
+			[
+				"Imge",
+				"Image"
+			],
+			[
+				"SDL_",
+				"SDL_opengles2.h>"
+			],
+			[
+				"in",
+				"main"
+			],
+			[
+				"imp",
+				"impl-trait\timpl … for … { … }"
+			],
+			[
+				"target_",
+				"target_compile_definitions\tbuiltin"
+			],
+			[
+				"dox",
+				"doxygen2docset_unittests"
+			],
+			[
+				"swit",
+				"switchboard"
+			],
+			[
+				"switch",
+				"switchboard-lib"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "KObject Build All",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"KObject Build All",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"KObject Build All",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"kobj",
+				"Build With: KObject Build All"
+			],
+			[
+				"c++",
+				"Set Syntax: C++"
+			],
+			[
+				"glsl",
+				"Set Syntax: OpenGL SL"
+			],
+			[
+				"wrap",
+				"Word Wrap: Toggle"
+			],
+			[
+				"sort",
+				"Sort Lines"
+			],
+			[
+				"to tab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"to space",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"toml",
+				"Set Syntax: TOML"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"isntall",
+				"Package Control: Install Package"
+			],
+			[
+				"debug",
+				"Debugger: Start"
+			],
+			[
+				"run",
+				"Rust: Next Message"
+			],
+			[
+				"start",
+				"Debugger: Start"
+			],
+			[
+				"debugger sta",
+				"Debugger: Add or Select Configuration"
+			],
+			[
+				"debugger config",
+				"Debugger: Add Configuration"
+			],
+			[
+				"installada",
+				"Debugger: Install Adapters"
+			],
+			[
+				"debugger install",
+				"Debugger: Install Adapters"
+			],
+			[
+				"install ada",
+				"Debugger: Install Adapters"
+			],
+			[
+				"add ",
+				"Debugger: Add Configuration"
+			],
+			[
+				"de",
+				"Debugger: Start (no debug)"
+			],
+			[
+				"debgger o",
+				"Debugger: Open"
+			],
+			[
+				"tab to ",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"set make",
+				"Set Syntax: Makefile Plus"
+			],
+			[
+				"blame",
+				"Git: Blame"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"ninja",
+				"Set Syntax: Ninja"
+			],
+			[
+				"wra",
+				"Word Wrap: Toggle"
+			],
+			[
+				"set syn baz",
+				"Set Syntax: Bazel"
+			],
+			[
+				"pytho",
+				"Set Syntax: Python"
+			],
+			[
+				"install pa",
+				"Package Control: Install Package"
+			],
+			[
+				"ass",
+				"Set Syntax: ARM Assembly"
+			],
+			[
+				"inst",
+				"Install Package Control"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 339.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/buzzy/VersionControlled/kobject",
+		"/Users/buzzy/VersionControlled/kobject/build"
+	],
+	"file_history":
+	[
+		"/Users/buzzy/VersionControlled/kobject/kobject.h",
+		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include/stdatomic.h",
+		"/Users/buzzy/VersionControlled/kobject/kobject.c",
+		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/tapi/13.1.6/include/stdatomic.h",
+		"/Users/buzzy/VersionControlled/kobject/kobject.sublime-project",
+		"/Users/buzzy/VersionControlled/kobject/main.c",
+		"/Users/buzzy/VersionControlled/kobject/main.c:7",
+		"/Users/buzzy/VersionControlled/kobject/kobject.h:17",
+		"/Users/buzzy/VersionControlled/kobject/CMakelists.txt",
+		"/Users/buzzy/VersionControlled/kohi/engine/src/core/kstring.c",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/third_party/spirv_cross/spirv_glsl.cpp",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/compiler/compiler.cc",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/third_party/khronos/GLES2/gl2ext.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/entity/shaders/texture_fill.frag",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/renderer/texture_descriptor.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/out/host_debug_unopt/gen/flutter/impeller/entity/gles/texture_fill.frag.gles",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/FlutterEngine.sublime-project",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/shell/platform/common/public/flutter_texture_registrar.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/third_party/angle/include/GLES/glext.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/shell/platform/windows/BUILD.gn",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/third_party/angle/BUILD.gn",
+		"/Users/buzzy/.profile",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/renderer/renderer_unittests.cc",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/out/host_debug/gen/flutter/impeller/fixtures/impeller.frag.metal",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/fixtures/impeller.frag",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/tools/gn",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/renderer/shader_types.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/README.md",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/renderer/backend/gles/buffer_bindings_gles.cc",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/docs/ubo_gles2.md",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/renderer/backend/gles/shader_library_gles.h",
+		"/Users/buzzy/VersionControlled/sft/src/image.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/renderer/backend/gles/proc_table_gles.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/third_party/khronos/GLES2/gl2.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/renderer/backend/gles/device_buffer_gles.cc",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/renderer/device_buffer.cc",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/renderer/device_buffer.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/third_party/spirv_cross/spirv_cross.hpp",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/third_party/spirv_cross/spirv.hpp",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/DEPS",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/compiler/BUILD.gn",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/third_party/khronos/OWNERS",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/compiler/types.cc",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/aiks/aiks_unittests.cc",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/renderer/backend/gles/pipeline_library_gles.cc",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/compiler/types.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/ci/licenses_golden/licenses_flutter",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/ci/licenses_golden/tool_signature",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/gpu/GLES2/gl2chromium.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/renderer/host_buffer.cc",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/renderer/backend/gles/texture_gles.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/renderer/texture.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/compiler/source_options.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/build/secondary/third_party/shaderc_flutter/BUILD.gn",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/third_party/shaderc/BUILD.gn",
+		"/Users/buzzy/Desktop/wasmsandbox/DEPS",
+		"/Users/buzzy/Desktop/wasmsandbox/build/toolchain/BUILD.gn",
+		"/Users/buzzy/Desktop/wasmsandbox/build/compiler/BUILD.gn",
+		"/Users/buzzy/Desktop/wasmsandbox/third_party/sqlite3/BUILD.gn",
+		"/Users/buzzy/Desktop/wasmsandbox/third_party/sqlite/BUILD.gn",
+		"/Users/buzzy/Desktop/wasmsandbox/build/secondary/third_party/gumbo/BUILD.gn",
+		"/Users/buzzy/Desktop/wasmsandbox/build/secondary/third_party/tinyxml2/BUILD.gn",
+		"/Users/buzzy/Desktop/wasmsandbox/build/secondary/third_party/doxygen2docset/BUILD.gn",
+		"/Users/buzzy/Desktop/wasmsandbox/out/Debug/compile_commands.json",
+		"/Users/buzzy/Desktop/wasmsandbox/build/BUILDCONFIG.gn",
+		"/Users/buzzy/Desktop/wasmsandbox/BUILD.gn",
+		"/Users/buzzy/Desktop/wasmsandbox/main/BUILD.gn",
+		"/Users/buzzy/Desktop/wasmsandbox/Makefile",
+		"/Users/buzzy/Desktop/wasmsandbox/wasmsandbox.sublime-project",
+		"/Users/buzzy/Desktop/wasmsandbox/main/main.cc",
+		"/Users/buzzy/Desktop/wasmsandbox/build/secondary/fml/BUILD.gn",
+		"/Users/buzzy/Desktop/wasmsandbox/build/secondary/impeller/BUILD.gn",
+		"/Users/buzzy/Desktop/wasmsandbox/.gn",
+		"/Users/buzzy/Desktop/wasmsandbox/README.md",
+		"/Users/buzzy/Desktop/wasmsandbox/.gitignore",
+		"/Users/buzzy/Desktop/wasmsandbox/LICENSE",
+		"/Users/buzzy/Desktop/bazel_hello/main.cc",
+		"/Users/buzzy/Desktop/bazel_hello/.gitignore",
+		"/Users/buzzy/Desktop/bazel_hello/BUILD",
+		"/Users/buzzy/Downloads/wasi-sdk-15.0/share/wasi-sysroot/include/wasi/api.h",
+		"/opt/homebrew/Cellar/wasmer/2.2.1/chinmaygarde.com/404.html",
+		"/opt/homebrew/Cellar/wasmer/2.2.1/chinmaygarde.com/index.html",
+		"/opt/homebrew/Cellar/wasmer/2.2.1/chinmaygarde.com/.gitignore",
+		"/opt/homebrew/Cellar/wasmer/2.2.1/chinmaygarde.com/Makefile",
+		"/opt/homebrew/Cellar/wasmer/2.2.1/chinmaygarde.com/build/index.html",
+		"/opt/homebrew/Cellar/wasmer/2.2.1/chinmaygarde.com/config/_default/config.toml",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/renderer/backend/gles/render_pass_gles.cc",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/tools/impeller.gni",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/flutter/impeller/entity/shaders/glyph_atlas.vert.wgsl",
+		"/Users/buzzy/VersionControlled/dawn/src/dawn/native/opengl/BufferGL.cpp",
+		"/Users/buzzy/VersionControlled/dawn/src/dawn/native/Error.h",
+		"/Users/buzzy/VersionControlled/dawn/src/dawn/native/opengl/PersistentPipelineStateGL.cpp",
+		"/Users/buzzy/VersionControlled/sft/sft.sublime-project",
+		"/Users/buzzy/VersionControlled/sft/geom.h",
+		"/Users/buzzy/VersionControlled/sft/benchmark.cc",
+		"/Users/buzzy/VersionControlled/sft/renderer.h",
+		"/Users/buzzy/VersionControlled/sft/renderer.cc",
+		"/Users/buzzy/VersionControlled/sft/CMakeLists.txt",
+		"/Users/buzzy/VersionControlled/sft/model.h",
+		"/Users/buzzy/VersionControlled/sft/image.h",
+		"/Users/buzzy/VersionControlled/sft/image.h:46",
+		"/Users/buzzy/VersionControlled/sft/renderer.h:18",
+		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/chrono:1075",
+		"/Users/buzzy/VersionControlled/sft/third_party/glm/glm/ext/matrix_clip_space.inl",
+		"/Users/buzzy/VersionControlled/sft/image.h:95",
+		"/Users/buzzy/VersionControlled/sft/model.h:53",
+		"/Users/buzzy/VersionControlled/sft/third_party/glm/glm/glm.hpp",
+		"/Users/buzzy/VersionControlled/sft/third_party/glm/glm/vec2.hpp",
+		"/Users/buzzy/VersionControlled/sft/third_party/tinyobjloader/tiny_obj_loader.h",
+		"/Users/buzzy/VersionControlled/sft/geom.cc",
+		"/Users/buzzy/VersionControlled/sft/image.cc",
+		"/Users/buzzy/VersionControlled/sft/model.cc",
+		"/Users/buzzy/VersionControlled/sft/main.cc",
+		"/Users/buzzy/VersionControlled/sft/third_party/tinyobjloader/experimental/tinyobj_loader_opt.h",
+		"/Users/buzzy/VersionControlled/sft/object.h",
+		"/Users/buzzy/VersionControlled/sft/third_party/sdl/include/SDL_render.h",
+		"/Users/buzzy/VersionControlled/sft/third_party/sdl/include/SDL_surface.h",
+		"/Users/buzzy/VersionControlled/sft/third_party/sdl/include/SDL_opengles2.h",
+		"/Users/buzzy/VersionControlled/sft/third_party/sdl/include/SDL_video.h",
+		"/Users/buzzy/VersionControlled/sft/third_party/sdl/include/SDL.h",
+		"/Users/buzzy/VersionControlled/sft/.gitignore",
+		"/Users/buzzy/VersionControlled/sft/third_party/sdl/include/SDL_metal.h",
+		"/Users/buzzy/VersionControlled/sft/third_party/sdl/include/close_code.h",
+		"/Users/buzzy/VersionControlled/sft/third_party/sdl/include/SDL_events.h",
+		"/Users/buzzy/VersionControlled/sft/sft.sublime-",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/third_party/dart/runtime/vm/simulator.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/third_party/dart/runtime/vm/globals.h",
+		"/Users/buzzy/VersionControlled/flutter_engine/src/build/secondary/third_party/swiftshader_flutter/BUILD.gn"
+	],
+	"find":
+	{
+		"height": 29.0
+	},
+	"find_in_files":
+	{
+		"height": 107.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"clasz",
+			"KObjectPtr",
+			"atomic_fetch",
+			"ATOMIC_FLAG_INIT",
+			"atomic_flag",
+			"ATOMIC_VAR_INIT",
+			"atomic_init",
+			"_Atomic",
+			"ATOMIC_FLAG_INIT",
+			"size_t"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 41.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.diagnostics":
+	{
+		"height": 138.0
+	},
+	"output.exec":
+	{
+		"height": 167.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.language servers":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "kobject.sublime-project",
+	"replace":
+	{
+		"height": 54.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"kobj",
+				"kobject.h"
+			],
+			[
+				"main",
+				"main.c"
+			],
+			[
+				"commandbuffrmt",
+				"Flutter Mac Engine/flutter/impeller/renderer/backend/metal/command_buffer_mtl.mm"
+			],
+			[
+				"renderpassmtl",
+				"Flutter Mac Engine/flutter/impeller/renderer/backend/metal/render_pass_mtl.mm"
+			],
+			[
+				"deps",
+				"Flutter Mac Engine/flutter/DEPS"
+			],
+			[
+				"vulkanhpp",
+				"Flutter Mac Engine/third_party/vulkan-headers/include/vulkan/vulkan.hpp"
+			],
+			[
+				"entitypass",
+				"Flutter Mac Engine/flutter/impeller/entity/entity_pass.cc"
+			],
+			[
+				"texturegles",
+				"Flutter Mac Engine/flutter/impeller/renderer/backend/gles/texture_gles.cc"
+			],
+			[
+				"renderpassgle",
+				"Flutter Mac Engine/flutter/impeller/renderer/backend/gles/render_pass_gles.cc"
+			],
+			[
+				"renderpass.cc",
+				"Flutter Mac Engine/flutter/impeller/renderer/render_pass.cc"
+			],
+			[
+				"copmiler.cc",
+				"Flutter Mac Engine/flutter/impeller/compiler/compiler.cc"
+			],
+			[
+				"compiler.cc",
+				"Flutter Mac Engine/flutter/impeller/compiler/compiler.cc"
+			],
+			[
+				"texturedescr",
+				"Flutter Mac Engine/flutter/impeller/renderer/texture_descriptor.h"
+			],
+			[
+				"gl2ext",
+				"Flutter Mac Engine/third_party/khronos/GLES2/gl2ext.h"
+			],
+			[
+				"glext",
+				"Flutter Mac Engine/third_party/angle/include/GLES/glext.h"
+			],
+			[
+				"texture_fill.frag.gles",
+				"Generated/host_debug_unopt/gen/flutter/impeller/entity/gles/texture_fill.frag.gles"
+			],
+			[
+				"flutteren",
+				"Flutter Mac Engine/FlutterEngine.sublime-project"
+			],
+			[
+				"fluter",
+				"Flutter Mac Engine/flutter/shell/platform/common/public/flutter_texture_registrar.h"
+			],
+			[
+				"texturefill.frag.gle",
+				"Generated/host_debug/gen/flutter/impeller/entity/gles/texture_fill.frag.gles"
+			],
+			[
+				"texturefill.fr",
+				"Flutter Mac Engine/flutter/impeller/entity/shaders/texture_fill.frag"
+			],
+			[
+				"third_party/angle/build.gn",
+				"Flutter Mac Engine/third_party/angle/BUILD.gn"
+			],
+			[
+				"angle/buil",
+				"Flutter Mac Engine/third_party/angle/BUILD.gn"
+			],
+			[
+				"impell",
+				"Flutter Mac Engine/flutter/impeller/fixtures/impeller.frag"
+			],
+			[
+				"impeller.fra",
+				"Flutter Mac Engine/flutter/impeller/fixtures/impeller.frag"
+			],
+			[
+				"impeller.frag.me",
+				"Generated/host_debug/gen/flutter/impeller/fixtures/impeller.frag.metal"
+			],
+			[
+				"rendereruni",
+				"Flutter Mac Engine/flutter/impeller/renderer/renderer_unittests.cc"
+			],
+			[
+				"tools/gn",
+				"Flutter Mac Engine/flutter/tools/gn"
+			],
+			[
+				"es2fDepthStencilClearTests.cpp",
+				"third_party/VK-GL-CTS/src/modules/gles2/functional/es2fDepthStencilClearTests.cpp"
+			],
+			[
+				"glesv",
+				"src/libGLESv2.gni"
+			],
+			[
+				"samplergl",
+				"impeller/renderer/backend/gles/sampler_gles.cc"
+			],
+			[
+				"bindings",
+				"impeller/renderer/backend/gles/buffer_bindings_gles.cc"
+			],
+			[
+				"ShaderLibraryGLES",
+				"impeller/renderer/backend/gles/shader_library_gles.h"
+			],
+			[
+				"impeller.fr",
+				"flutter/impeller/fixtures/impeller.frag"
+			],
+			[
+				"proctablegle",
+				"flutter/impeller/renderer/backend/gles/proc_table_gles.h"
+			],
+			[
+				"librarygles",
+				"flutter/impeller/renderer/backend/gles/pipeline_library_gles.cc"
+			],
+			[
+				"renderer",
+				"flutter/impeller/renderer/renderer_unittests.cc"
+			],
+			[
+				"aiksuni",
+				"flutter/impeller/aiks/aiks_unittests.cc"
+			],
+			[
+				"tool_si",
+				"flutter/ci/licenses_golden/tool_signature"
+			],
+			[
+				"licenses_fl",
+				"flutter/ci/licenses_golden/licenses_flutter"
+			],
+			[
+				"texture.h",
+				"flutter/impeller/renderer/texture.h"
+			],
+			[
+				"texturegle",
+				"flutter/impeller/renderer/backend/gles/texture_gles.h"
+			],
+			[
+				"devicebuffer",
+				"flutter/impeller/renderer/device_buffer.cc"
+			],
+			[
+				"devicebuffer.h",
+				"flutter/impeller/renderer/device_buffer.h"
+			],
+			[
+				"devicebuffergl",
+				"flutter/impeller/renderer/backend/gles/device_buffer_gles.cc"
+			],
+			[
+				"gl2ch",
+				"gpu/GLES2/gl2chromium.h"
+			],
+			[
+				"shaderc_flutter/bui",
+				"build/secondary/third_party/shaderc_flutter/BUILD.gn"
+			],
+			[
+				"shaderc/bui",
+				"third_party/shaderc/BUILD.gn"
+			],
+			[
+				"impeller/compiler/bui",
+				"flutter/impeller/compiler/BUILD.gn"
+			],
+			[
+				"third_party/khrono",
+				"third_party/khronos/OWNERS"
+			],
+			[
+				"spirv.hpp",
+				"third_party/spirv_cross/spirv.hpp"
+			],
+			[
+				"spirv_c",
+				"third_party/spirv_cross/spirv_cross.hpp"
+			],
+			[
+				"spirv_cross.hpp",
+				"third_party/spirv_cross/spirv_cross.hpp"
+			],
+			[
+				"compiler",
+				"build/compiler/BUILD.gn"
+			],
+			[
+				"toolchai",
+				"build/toolchain/BUILD.gn"
+			],
+			[
+				"toolchain/",
+				"build/toolchain/BUILD.gn"
+			],
+			[
+				"compil",
+				"out/Debug/compile_commands.json"
+			],
+			[
+				"main.",
+				"main/main.cc"
+			],
+			[
+				"compi",
+				"out/Debug/compile_commands.json"
+			],
+			[
+				"main.cc",
+				"main/main.cc"
+			],
+			[
+				"makefil",
+				"Makefile"
+			],
+			[
+				"buildconfig",
+				"build/BUILDCONFIG.gn"
+			],
+			[
+				"main/bui",
+				"main/BUILD.gn"
+			],
+			[
+				"build",
+				"BUILD.gn"
+			],
+			[
+				"projec",
+				"wasmsandbox.sublime-project"
+			],
+			[
+				"toolchain",
+				"build/toolchain/BUILD.gn"
+			],
+			[
+				"toolchain/bui",
+				"build/toolchain/BUILD.gn"
+			],
+			[
+				"dep",
+				"DEPS"
+			],
+			[
+				"api.h",
+				"wasi/api.h"
+			],
+			[
+				"config.",
+				"config/_default/config.toml"
+			],
+			[
+				"impeller",
+				"tools/impeller.gni"
+			],
+			[
+				"rrenderpipe",
+				"src/dawn/native/opengl/RenderPipelineGL.cpp"
+			],
+			[
+				"image.h",
+				"image.h"
+			],
+			[
+				"geom.h",
+				"geom.h"
+			],
+			[
+				"mode",
+				"model.h"
+			],
+			[
+				"glm/vec",
+				"third_party/glm/glm/vec2.hpp"
+			],
+			[
+				"glm",
+				"third_party/glm/glm/glm.hpp"
+			],
+			[
+				"geom",
+				"geom.h"
+			],
+			[
+				"mo",
+				"model.h"
+			],
+			[
+				"sft.",
+				"sft.sublime-project"
+			],
+			[
+				"render",
+				"renderer.h"
+			],
+			[
+				"image.",
+				"image.h"
+			],
+			[
+				"tinyobjloader.h",
+				"third_party/tinyobjloader/tiny_obj_loader.h"
+			],
+			[
+				"tinyobj",
+				"third_party/tinyobjloader/experimental/tinyobj_loader_opt.h"
+			],
+			[
+				"tiny",
+				"third_party/tinyobjloader/tiny_obj_loader.h"
+			],
+			[
+				"cmake",
+				"CMakeLists.txt"
+			],
+			[
+				"close_code",
+				"third_party/sdl/include/close_code.h"
+			],
+			[
+				"sdl_metal",
+				"third_party/sdl/include/SDL_metal.h"
+			],
+			[
+				"SDL_opengles2",
+				"third_party/sdl/include/SDL_opengles2.h"
+			],
+			[
+				"sf",
+				"sft.sublime-project"
+			],
+			[
+				"flutter/tools/gn",
+				"flutter/tools/gn"
+			],
+			[
+				"platform/globals",
+				"third_party/dart/runtime/platform/globals.h"
+			],
+			[
+				"vm/globals",
+				"third_party/dart/runtime/vm/globals.h"
+			],
+			[
+				"pi",
+				"source/machine/pointer_input.cc"
+			],
+			[
+				"skpoint",
+				"third_party/skia/include/core/SkPoint.h"
+			],
+			[
+				"sktextblob",
+				"third_party/skia/src/core/SkTextBlobPriv.h"
+			],
+			[
+				"SkTextBlob",
+				"third_party/skia/include/core/SkTextBlob.h"
+			],
+			[
+				"display",
+				"flutter/display_list/display_list.h"
+			],
+			[
+				"displaylisuni",
+				"display_list/display_list_unittests.cc"
+			],
+			[
+				"displalistuni",
+				"display_list/display_list_unittests.cc"
+			],
+			[
+				"display_list_canvas_unittests.cc",
+				"display_list/display_list_canvas_unittests.cc"
+			],
+			[
+				"imagefilter",
+				"third_party/skia/include/core/SkImageFilter.h"
+			],
+			[
+				"blurfilter",
+				"third_party/skia/src/core/SkMaskBlurFilter.cpp"
+			],
+			[
+				"info.pl",
+				"testing/ios/IosUnitTests/App/Info.plist"
+			],
+			[
+				"testing.cc",
+				"testing/testing.cc"
+			],
+			[
+				"detect_host_arch",
+				"detect_host_arch.py"
+			],
+			[
+				"gclient.py",
+				"gclient.py"
+			],
+			[
+				"gclient",
+				"gclient"
+			],
+			[
+				"skpain",
+				"src/third_party/skia/include/core/SkPaint.h"
+			],
+			[
+				"FlutterDarwinContextMetal.mm",
+				"shell/platform/darwin/graphics/FlutterDarwinContextMetal.mm"
+			],
+			[
+				"ios_surface_metal.mm",
+				"shell/platform/darwin/ios/ios_surface_metal.mm"
+			],
+			[
+				"IOScontextmetal",
+				"shell/platform/darwin/ios/ios_context_metal.mm"
+			],
+			[
+				"platformviewios",
+				"shell/platform/darwin/ios/platform_view_ios.mm"
+			],
+			[
+				"flutterview.mm",
+				"shell/platform/darwin/ios/framework/Source/FlutterView.mm"
+			],
+			[
+				"matri",
+				"Library/Geometry/Headers/Geometry/Matrix.h"
+			],
+			[
+				"matrix.cc",
+				"Library/Geometry/Source/Matrix.cc"
+			],
+			[
+				"ninja",
+				"ninjalog.README.md"
+			],
+			[
+				"gumbo/cm",
+				"third_party/gumbo/CMakeLists.txt"
+			],
+			[
+				"fetch_configs",
+				"fetch_configs/skia.py"
+			],
+			[
+				"test/cmake",
+				"third_party/googletest/CMakeLists.txt"
+			],
+			[
+				"swith",
+				"Switchboard/source/switchboard.h"
+			],
+			[
+				"switchboard",
+				"Switchboard/source/switchboard.cc"
+			],
+			[
+				"meson.bui",
+				"meson.build"
+			],
+			[
+				"landmin",
+				"build/landmines.py"
+			],
+			[
+				"ThreadSafetyAnalysis",
+				"Library/Core/Headers/Core/ThreadSafetyAnalysis.h"
+			],
+			[
+				"mutex.h",
+				"Library/Core/Headers/Core/Mutex.h"
+			],
+			[
+				"macro",
+				"Library/Core/Headers/Core/Macros.h"
+			],
+			[
+				"mutexed",
+				"Library/Core/Headers/Core/Mutexed.h"
+			],
+			[
+				"work",
+				"WORKSPACE"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 144.0,
+		"last_filter": "string_format",
+		"selected_items":
+		[
+			[
+				"string_format",
+				"string_format"
+			],
+			[
+				"log_",
+				"log_output"
+			],
+			[
+				"KFATAL",
+				"KFATAL"
+			],
+			[
+				"VULKAN_HPP_DEFAULT_DISPATCHER_TYPE",
+				"VULKAN_HPP_DEFAULT_DISPATCHER_TYPE"
+			],
+			[
+				"pixelThresholdCompare",
+				"pixelThresholdCompare"
+			],
+			[
+				"ShaderMetadata",
+				"ShaderMetadata"
+			],
+			[
+				"BufferResource",
+				"BufferResource"
+			],
+			[
+				"ExecutionModel",
+				"ToExecutionModel"
+			],
+			[
+				"SetStencilFuncsAndMask",
+				"SetStencilFuncsAndMask"
+			],
+			[
+				"GlyphPositioning",
+				"GlyphPositioning"
+			],
+			[
+				"SkTextBlobRunIterator",
+				"SkTextBlobRunIterator"
+			],
+			[
+				"next",
+				"next"
+			],
+			[
+				"FlutterDarwinContextMetal",
+				"FlutterDarwinContextMetal"
+			],
+			[
+				"GetMainContext",
+				"GetMainContext"
+			],
+			[
+				"GLMatrix",
+				"GLMatrix"
+			],
+			[
+				"RL_GUARDED_BY",
+				"RL_GUARDED_BY"
+			]
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 283.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
