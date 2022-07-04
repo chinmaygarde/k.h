@@ -159,3 +159,25 @@ TEST(KObjectTest, KLogging) {
   K_DLOG_WARNING("%s", "Hi! Warn DEBUG");
   K_DLOG_ERROR("%s", "Hi! Err DEBUG");
 }
+
+TEST(KObjectTest, KHash) {
+  KStringRef a = KStringAllocWithFormat("Hello");
+  KStringRef b = KStringAllocWithFormat("Hello");
+  ASSERT_EQ(KStringGetHash(a), KStringGetHash(b));
+  KStringRelease(a);
+  KStringRelease(b);
+}
+
+TEST(KObjectTest, KEqual) {
+  KStringRef a = KStringAllocWithFormat("Hello");
+  KStringRef b = KStringAllocWithFormat("Hello");
+  ASSERT_TRUE(KStringIsEqual(a, b));
+  KStringRelease(a);
+  KStringRelease(b);
+}
+
+TEST(KObjectTest, KMap) {
+  KMapRef map =
+      KMapAlloc((KMapKeyHash)&KStringGetHash, (KMapKeyEqual)&KStringIsEqual);
+  KMapRelease(map);
+}

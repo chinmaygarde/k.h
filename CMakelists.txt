@@ -22,9 +22,13 @@ add_library(kobject
   src/kassert.h
   src/kautorelease.c
   src/kautorelease.h
+  src/khash.c
+  src/khash.h
   src/klogging.c
   src/klogging.h
   src/kmacros.h
+  src/kmap.c
+  src/kmap.h
   src/kobject.c
   src/kobject.h
   src/kstring.c

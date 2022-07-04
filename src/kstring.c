@@ -2,7 +2,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
+#include "khash.h"
 #include "kobject.h"
 
 struct KString {
@@ -65,4 +67,29 @@ size_t KStringGetLength(KStringRef str) {
 
 const char* KStringGetData(KStringRef str) {
   return str->buffer;
+}
+
+size_t KStringGetHash(KStringRef str) {
+  KHash hash = 31;
+  if (str) {
+    hash = KHashCombine(
+        KHashCreate((const uint8_t*)KStringGetData(str), KStringGetLength(str)),
+        hash);
+  }
+  return hash;
+}
+
+bool KStringIsEqual(KStringRef lhs, KStringRef rhs) {
+  if (!lhs || !rhs) {
+    return false;
+  }
+  size_t lhs_len = KStringGetLength(lhs);
+  size_t rhs_len = KStringGetLength(rhs);
+  if (lhs_len != rhs_len) {
+    return false;
+  }
+  if (lhs_len == 0u) {
+    return true;
+  }
+  return memcmp(KStringGetData(lhs), KStringGetData(rhs), lhs_len) == 0;
 }

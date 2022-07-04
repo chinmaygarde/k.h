@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdarg.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include "kmacros.h"
 
@@ -21,5 +22,9 @@ void KStringRelease(KStringRef);
 size_t KStringGetLength(KStringRef);
 
 const char* KStringGetData(KStringRef);
+
+size_t KStringGetHash(KStringRef str);
+
+bool KStringIsEqual(KStringRef lhs, KStringRef rhs);
 
 KEXTERN_C_END
