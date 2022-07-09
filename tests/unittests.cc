@@ -175,9 +175,3 @@ TEST(KObjectTest, KEqual) {
   KStringRelease(a);
   KStringRelease(b);
 }
-
-TEST(KObjectTest, KMap) {
-  KMapRef map =
-      KMapAlloc((KMapKeyHash)&KStringGetHash, (KMapKeyEqual)&KStringIsEqual);
-  KMapRelease(map);
-}

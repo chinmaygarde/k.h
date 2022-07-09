@@ -3,7 +3,14 @@
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdio.h>
+
+#include "kplatform.h"
+
+#if K_OS_WIN
+#include <io.h>
+#else  // K_OS_WIN
 #include <unistd.h>
+#endif  // K_OS_WIN
 
 #include "kstring.h"
 
@@ -29,7 +36,13 @@ void KLogString(KLogLevel level, KStringRef str) {
   static bool tty_checked = false;
   static bool is_tty = false;
   if (!tty_checked) {
-    is_tty = isatty(STDOUT_FILENO) == 1;
+    is_tty =
+#if K_OS_WIN
+        _isatty(_fileno(stdout))
+#else   // K_OS_WIN
+        isatty(STDOUT_FILENO)
+#endif  // K_OS_WIN
+        == 1;
     tty_checked = true;
   }
   if (is_tty) {

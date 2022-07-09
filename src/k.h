@@ -1,6 +1,7 @@
 #pragma once
 
 #include "kmacros.h"
+#include "kplatform.h"
 
 #include "kassert.h"
 #include "khash.h"
@@ -11,5 +12,4 @@
 
 #include "kallocation.h"
 #include "karray.h"
-#include "kmap.h"
 #include "kstring.h"
