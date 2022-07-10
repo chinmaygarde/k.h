@@ -8,6 +8,7 @@
 #include <Windows.h>
 #else  // K_OS_WIN
 #include <pthread.h>
+#include <unistd.h>
 #endif  // K_OS_WIN
 
 struct KThread {
@@ -136,5 +137,18 @@ void KThreadJoin(KThreadRef thread) {
   pthread_join(thread->handle, NULL);
   thread->is_joined = true;
   thread->is_valid = false;
+#endif  // K_OS_WIN
+}
+
+size_t KThreadGetHardwareConcurrency() {
+#if K_OS_WIN
+  // TODO
+  return 1;
+#else   // K_OS_WIN
+  long result = sysconf(_SC_NPROCESSORS_CONF);
+  if (result <= 0) {
+    return 1;
+  }
+  return result;
 #endif  // K_OS_WIN
 }

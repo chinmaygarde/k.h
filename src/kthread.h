@@ -18,4 +18,6 @@ void KThreadRelease(KThreadRef);
 
 void KThreadJoin(KThreadRef);
 
+size_t KThreadGetHardwareConcurrency();
+
 KEXTERN_C_END

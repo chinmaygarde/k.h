@@ -2,6 +2,7 @@
 #include "k.h"
 
 #include <string>
+#include <thread>
 
 TEST(KObjectTest, Main) {
   typedef struct MyStruct {
@@ -196,4 +197,10 @@ TEST(KObjectTest, KThread) {
   ASSERT_TRUE(KMutexLock(captures.mutex));
   KThreadRelease(thread);
   KMutexRelease(captures.mutex);
+}
+
+TEST(KObjectTest, KHardwareConcurrency) {
+  K_LOG_INFO("Hardware concurrency: %zu", KThreadGetHardwareConcurrency());
+  ASSERT_EQ(std::thread::hardware_concurrency(),
+            KThreadGetHardwareConcurrency());
 }
