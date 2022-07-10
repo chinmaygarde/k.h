@@ -10,7 +10,7 @@ jobs:
   platforms_matrix:
     strategy:
       matrix:
-        os: [ windows-latest, ubuntu-latest ]
+        os: [ windows-latest, ubuntu-latest, macos-latest ]
 
     name: Test ${{ matrix.os }}
 

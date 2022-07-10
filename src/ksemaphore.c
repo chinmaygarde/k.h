@@ -5,6 +5,8 @@
 
 #if K_OS_WIN
 #include <Windows.h>
+#elif K_OS_DARWIN
+#include <dispatch/dispatch.h>
 #else  // K_OS_WIN
 #include <semaphore.h>
 #endif  // K_OS_WIN
@@ -12,6 +14,8 @@
 struct KSemaphore {
 #if K_OS_WIN
   HANDLE handle;
+#elif K_OS_DARWIN
+  dispatch_semaphore_t handle;
 #else   // K_OS_WIN
   sem_t handle;
   bool valid;
@@ -24,6 +28,13 @@ void KSemaphoreDeInit(KSemaphoreRef sema) {
 #if K_OS_WIN
   if (sema->handle) {
     CloseHandle(sema->handle);
+  }
+#elif K_OS_DARWIN
+
+  if (sema->handle) {
+    while (dispatch_semaphore_signal(sema->handle) != 0)
+      ;
+    dispatch_release(sema->handle);
   }
 #else   // K_OS_WIN
   if (sema->valid) {
@@ -57,6 +68,13 @@ KSemaphoreRef KSemaphoreAlloc(size_t count) {
     return NULL;
   }
   sema->handle = handle;
+#elif K_OS_DARWIN
+  dispatch_semaphore_t handle = dispatch_semaphore_create(count);
+  if (!handle) {
+    KSemaphoreRelease(sema);
+    return NULL;
+  }
+  sema->handle = handle;
 #else   // K_OS_WIN
   sem_t handle;
   if (sem_init(&handle, 0, count) != 0) {
@@ -84,6 +102,11 @@ bool KSemaphoreWait(KSemaphoreRef sema) {
   }
 #if K_OS_WIN
   return WaitForSingleObject(sema->handle, INFINITE) == WAIT_OBJECT_0;
+#elif K_OS_DARWIN
+  if (!sema->handle) {
+    return false;
+  }
+  return dispatch_semaphore_wait(sema->handle, DISPATCH_TIME_FOREVER) == 0;
 #else   // K_OS_WIN
   if (!sema->valid) {
     return false;
@@ -101,6 +124,11 @@ bool KSemaphoreSignal(KSemaphoreRef sema) {
                           1u,            // LONG   lReleaseCount
                           NULL           // LPLONG lpPreviousCount
                           ) == TRUE;
+#elif K_OS_DARWIN
+  if (!sema->handle) {
+    return false;
+  }
+  return dispatch_semaphore_signal(sema->handle) != 0;
 #else   // K_OS_WIN
   if (!sema->valid) {
     return false;
