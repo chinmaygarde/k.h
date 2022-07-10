@@ -23,7 +23,7 @@ jobs:
 
     - name: Update Linux Dependencies
       if: matrix.os == 'ubuntu-latest'
-      run: apt update && apt install -y cmake
+      run: sudo apt update && sudo apt install -y cmake
 
     - name: Update Submodules
       run: git submodule update --init --recursive
