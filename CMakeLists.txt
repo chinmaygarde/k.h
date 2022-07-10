@@ -14,10 +14,8 @@ else()
     add_compile_options(
       -Wall
       -Wextra
-      -pedantic
       -Werror
       -Wno-unused-parameter
-      -Wno-gnu-zero-variadic-macro-arguments
     )
 endif()
 
