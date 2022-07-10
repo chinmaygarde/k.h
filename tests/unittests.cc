@@ -177,20 +177,23 @@ TEST(KObjectTest, KEqual) {
 }
 
 TEST(KObjectTest, KThread) {
-  static KMutexRef mutex = nullptr;
-  ASSERT_EQ(mutex, nullptr);
-  mutex = KMutexAlloc();
-  ASSERT_NE(mutex, nullptr);
-  ASSERT_TRUE(KMutexLock(mutex));
+  struct Captures {
+    KMutexRef mutex;
+    const char* argument;
+  } captures = {};
+  captures.argument = "Hello";
+  captures.mutex = KMutexAlloc();
+  ASSERT_NE(captures.mutex, nullptr);
+  ASSERT_TRUE(KMutexLock(captures.mutex));
   KThreadRef thread = KThreadAlloc(
       [](void* arg) {
-        K_LOG_INFO("Thread says: %s", (const char*)(arg));
-        ASSERT_TRUE(KMutexUnlock(mutex));
+        Captures* captures = (Captures*)(arg);
+        K_LOG_INFO("Thread says: %s", captures->argument);
+        ASSERT_TRUE(KMutexUnlock(captures->mutex));
       },
-      (void*)"Hello");
+      &captures);
   ASSERT_NE(thread, nullptr);
-  ASSERT_TRUE(KMutexLock(mutex));
+  ASSERT_TRUE(KMutexLock(captures.mutex));
   KThreadRelease(thread);
-  KMutexRelease(mutex);
-  mutex = nullptr;
+  KMutexRelease(captures.mutex);
 }

@@ -50,7 +50,7 @@ bool KMutexLock(KMutexRef mutex) {
 
 bool KMutexUnlock(KMutexRef mutex) {
   if (!mutex) {
-    return NULL;
+    return false;
   }
   return KSemaphoreSignal(mutex->sema);
 }

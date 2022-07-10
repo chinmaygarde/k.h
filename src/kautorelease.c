@@ -2,7 +2,7 @@
 
 #include "karray.h"
 
-_Thread_local KArrayRef tPool;
+K_THREAD_LOCAL KArrayRef tPool;
 
 bool KAutoreleasePoolAddObject(KObjectRef obj) {
   if (!obj) {

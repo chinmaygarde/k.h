@@ -19,6 +19,6 @@
 
 KEXTERN_C_BEGIN
 
-_Noreturn void KAbort();
+K_NO_RETURN void KAbort();
 
 KEXTERN_C_END
