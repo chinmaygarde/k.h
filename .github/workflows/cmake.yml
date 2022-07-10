@@ -10,21 +10,21 @@ jobs:
   platforms_matrix:
     strategy:
       matrix:
-        os: [ ubuntu-latest ]
+        os: [ windows-latest ]
 
-      name: Test ${{ matrix.os }}
+    name: Test ${{ matrix.os }}
 
-      runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
 
-      steps:
-      - uses: actions/checkout@v3
+    steps:
+    - uses: actions/checkout@v3
 
-      - name: Configure CMake
-        run: cmake -B ${{github.workspace}}/build
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build
 
-      - name: Build
-        run: cmake --build ${{github.workspace}}/build
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build
 
-      - name: Test
-        working-directory: ${{github.workspace}}/build
-        run: ctest
+    - name: Test
+      working-directory: ${{github.workspace}}/build
+      run: ctest
