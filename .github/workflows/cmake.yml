@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  platforms_matrix:
+  host_platforms:
     strategy:
       matrix:
         os: [ windows-latest, ubuntu-latest, macos-latest ]
