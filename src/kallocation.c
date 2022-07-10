@@ -1,6 +1,5 @@
 #include "kallocation.h"
 
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "kobject.h"

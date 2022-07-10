@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ktypes.h"
+
 #include "kmacros.h"
 #include "kplatform.h"
 
@@ -12,4 +14,6 @@
 
 #include "kallocation.h"
 #include "karray.h"
+#include "kmutex.h"
 #include "kstring.h"
+#include "kthread.h"

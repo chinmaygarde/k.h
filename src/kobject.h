@@ -1,6 +1,5 @@
 #pragma once
 
-#include <stddef.h>
 #include "kmacros.h"
 
 KEXTERN_C_BEGIN

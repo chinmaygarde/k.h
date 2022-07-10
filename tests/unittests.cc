@@ -175,3 +175,22 @@ TEST(KObjectTest, KEqual) {
   KStringRelease(a);
   KStringRelease(b);
 }
+
+TEST(KObjectTest, KThread) {
+  static KMutexRef mutex = nullptr;
+  ASSERT_EQ(mutex, nullptr);
+  mutex = KMutexAlloc();
+  ASSERT_NE(mutex, nullptr);
+  ASSERT_TRUE(KMutexLock(mutex));
+  KThreadRef thread = KThreadAlloc(
+      [](void* arg) {
+        K_LOG_INFO("Thread says: %s", (const char*)(arg));
+        ASSERT_TRUE(KMutexUnlock(mutex));
+      },
+      (void*)"Hello");
+  ASSERT_NE(thread, nullptr);
+  ASSERT_TRUE(KMutexLock(mutex));
+  KThreadRelease(thread);
+  KMutexRelease(mutex);
+  mutex = nullptr;
+}

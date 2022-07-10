@@ -1,8 +1,7 @@
 #pragma once
 
-#include <stddef.h>
-#include <stdint.h>
 #include "kmacros.h"
+#include "ktypes.h"
 
 KEXTERN_C_BEGIN
 

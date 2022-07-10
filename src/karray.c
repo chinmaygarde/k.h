@@ -1,7 +1,6 @@
 #include "karray.h"
-#include "kallocation.h"
 
-#include <stdio.h>
+#include "kallocation.h"
 
 struct KArray {
   size_t length;
