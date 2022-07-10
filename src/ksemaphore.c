@@ -30,10 +30,10 @@ void KSemaphoreDeInit(KSemaphoreRef sema) {
     CloseHandle(sema->handle);
   }
 #elif K_OS_DARWIN
-
   if (sema->handle) {
-    while (dispatch_semaphore_signal(sema->handle) != 0)
-      ;
+    while (dispatch_semaphore_signal(sema->handle) != 0) {
+      // Nothing to do.
+    }
     dispatch_release(sema->handle);
   }
 #else   // K_OS_WIN
