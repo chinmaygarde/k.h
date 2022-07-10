@@ -9,7 +9,7 @@ TEST(KObjectTest, Main) {
   } MyStruct;
 
   static bool hello;
-  static uint32_t goodbye;
+  static size_t goodbye;
 
   hello = false;
   goodbye = 0;

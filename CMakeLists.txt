@@ -57,6 +57,7 @@ if(K_BUILD_TESTS)
   target_link_libraries(kobject_unittests
     PRIVATE
       gtest_main
+      gtest
       kobject
   )
 

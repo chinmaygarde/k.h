@@ -38,7 +38,11 @@ KStringRef KStringAllocWithFormatV(const char* format, va_list args) {
     return NULL;
   }
 
-  int count = vsnprintf(NULL, 0u, format, args);
+  va_list args_len;
+  va_copy(args_len, args);
+  int count = vsnprintf(NULL, 0u, format, args_len);
+  va_end(args_len);
+
   str->buffer = malloc(count + 1);
   str->size = count;
 
