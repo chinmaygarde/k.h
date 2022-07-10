@@ -84,7 +84,7 @@ TEST(KObjectTest, KArray) {
 
   KClass my_class;
   my_class.init = [](void*) { alloc_count++; };
-  my_class.deinit = [](void* obj) { dealloc_count++; };
+  my_class.deinit = [](void*) { dealloc_count++; };
   my_class.size = sizeof(MyStruct);
 
   KArrayRef array = KArrayAlloc();
