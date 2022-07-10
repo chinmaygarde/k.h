@@ -28,7 +28,7 @@
 
 #else
 
-#define K_NO_RETURN _Noreturn
+#define K_NO_RETURN __attribute__((noreturn))
 #define K_THREAD_LOCAL _Thread_local
 
 #endif
