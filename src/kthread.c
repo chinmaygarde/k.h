@@ -142,8 +142,13 @@ void KThreadJoin(KThreadRef thread) {
 
 size_t KThreadGetHardwareConcurrency() {
 #if K_OS_WIN
-  // TODO
-  return 1;
+  SYSTEM_INFO sysinfo;
+  GetSystemInfo(&sysinfo);
+  int result = sysinfo.dwNumberOfProcessors;
+  if (result <= 0) {
+    return 1;
+  }
+  return result;
 #else   // K_OS_WIN
   long result = sysconf(_SC_NPROCESSORS_CONF);
   if (result <= 0) {
