@@ -70,14 +70,6 @@ size_t KArrayGetLength(KArrayRef array) {
   return array->length;
 }
 
-void KArrayRetain(KArrayRef array) {
-  KObjectRetain(array);
-}
-
-void KArrayRelease(KArrayRef array) {
-  KObjectRelease(array);
-}
-
 size_t KArrayRemoveAllObjects(KArrayRef array) {
   KObjectRef* items = KAllocationGetBuffer(array->items);
   for (size_t i = 0; i < array->length; i++) {

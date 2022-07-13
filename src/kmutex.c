@@ -33,14 +33,6 @@ KMutexRef KMutexAlloc() {
   return mutex;
 }
 
-void KMutexRetain(KMutexRef mutex) {
-  KObjectRetain(mutex);
-}
-
-void KMutexRelease(KMutexRef mutex) {
-  KObjectRelease(mutex);
-}
-
 bool KMutexLock(KMutexRef mutex) {
   if (!mutex) {
     return false;

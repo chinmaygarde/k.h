@@ -32,3 +32,13 @@
 #define K_THREAD_LOCAL _Thread_local
 
 #endif
+
+#define K_DEF_OBJECT(obj)                     \
+  struct obj;                                 \
+  typedef struct obj* obj##Ref;               \
+  inline void obj##Retain(obj##Ref object) {  \
+    KObjectRetain(object);                    \
+  }                                           \
+  inline void obj##Release(obj##Ref object) { \
+    KObjectRelease(object);                   \
+  }

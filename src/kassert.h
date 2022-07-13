@@ -5,7 +5,7 @@
 
 #define K_ASSERT(x)                             \
   {                                             \
-    if (!(x)) [[unlikely]] {                    \
+    if (!(x)) {                                 \
       K_LOG_ERROR("Assertion failed '" #x "'"); \
       KAbort();                                 \
     }                                           \

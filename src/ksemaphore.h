@@ -1,21 +1,17 @@
 #pragma once
 
 #include "kmacros.h"
+#include "kobject.h"
 #include "ktypes.h"
 
 KEXTERN_C_BEGIN
 
-struct KSemaphore;
-typedef struct KSemaphore* KSemaphoreRef;
+K_DEF_OBJECT(KSemaphore);
 
 KSemaphoreRef KSemaphoreAlloc(size_t count);
 
-void KSemaphoreRetain(KSemaphoreRef sema);
+bool KSemaphoreWait(KSemaphoreRef semaphore);
 
-void KSemaphoreRelease(KSemaphoreRef sema);
-
-bool KSemaphoreWait(KSemaphoreRef sema);
-
-bool KSemaphoreSignal(KSemaphoreRef sema);
+bool KSemaphoreSignal(KSemaphoreRef semaphore);
 
 KEXTERN_C_END

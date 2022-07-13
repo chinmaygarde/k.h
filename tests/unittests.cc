@@ -204,3 +204,33 @@ TEST(KObjectTest, KHardwareConcurrency) {
   ASSERT_EQ(std::thread::hardware_concurrency(),
             KThreadGetHardwareConcurrency());
 }
+
+TEST(KObjectTest, KMap) {
+  KMapRef map =
+      KMapAlloc((KMapHash)&KStringGetHash, (KMapEqual)&KStringIsEqual);
+  ASSERT_EQ(KMapGetCount(map), 0u);
+  KStringRef value = KStringAllocWithFormat("MyValue");
+  for (size_t i = 0; i < 1000; i++) {
+    KStringRef key = KStringAllocWithFormat("Key%zu", i);
+    ASSERT_TRUE(KMapSetValue(map, key, value));
+    KStringRelease(key);
+    K_LOG_INFO(" Added Count=%zu LoadFactor=%f", KMapGetCount(map),
+               KMapGetLoadFactor(map));
+  }
+  for (size_t i = 0; i < 1000; i++) {
+    KStringRef key = KStringAllocWithFormat("Key%zu", i);
+    KStringRef found_value = (KStringRef)KMapGetValue(map, key);
+    ASSERT_NE(found_value, nullptr);
+    ASSERT_TRUE(KStringIsEqual(found_value, value));
+    KStringRelease(key);
+  }
+  for (size_t i = 0; i < 1000; i++) {
+    KStringRef key = KStringAllocWithFormat("Key%zu", i);
+    ASSERT_TRUE(KMapRemoveValue(map, key));
+    KStringRelease(key);
+    K_LOG_INFO(" Removed Count=%zu LoadFactor=%f", KMapGetCount(map),
+               KMapGetLoadFactor(map));
+  }
+  KMapRelease(map);
+  KStringRelease(value);
+}

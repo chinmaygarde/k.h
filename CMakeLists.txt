@@ -32,6 +32,8 @@ add_library(kobject
   src/klogging.c
   src/klogging.h
   src/kmacros.h
+  src/kmap.c
+  src/kmap.h
   src/kmutex.c
   src/kmutex.h
   src/kobject.c

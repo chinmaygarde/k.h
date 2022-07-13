@@ -1,21 +1,17 @@
 #pragma once
 
 #include "kmacros.h"
+#include "kobject.h"
 #include "ktypes.h"
 
 KEXTERN_C_BEGIN
 
-struct KMutex;
-typedef struct KMutex* KMutexRef;
+K_DEF_OBJECT(KMutex);
 
 KMutexRef KMutexAlloc();
 
-void KMutexRetain(KMutexRef);
+bool KMutexLock(KMutexRef mutex);
 
-void KMutexRelease(KMutexRef);
-
-bool KMutexLock(KMutexRef);
-
-bool KMutexUnlock(KMutexRef);
+bool KMutexUnlock(KMutexRef mutex);
 
 KEXTERN_C_END

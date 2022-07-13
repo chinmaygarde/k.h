@@ -109,14 +109,6 @@ KThreadRef KThreadAlloc(KThreadProc proc, void* user_data) {
   return thread;
 }
 
-void KThreadRetain(KThreadRef thread) {
-  KObjectRetain(thread);
-}
-
-void KThreadRelease(KThreadRef thread) {
-  KObjectRelease(thread);
-}
-
 void KThreadJoin(KThreadRef thread) {
   if (!thread) {
     return;

@@ -58,14 +58,6 @@ KStringRef KStringAllocWithFormatV(const char* format, va_list args) {
   return str;
 }
 
-void KStringRetain(KStringRef str) {
-  KObjectRetain(str);
-}
-
-void KStringRelease(KStringRef str) {
-  KObjectRelease(str);
-}
-
 size_t KStringGetLength(KStringRef str) {
   return str->size;
 }
@@ -87,6 +79,9 @@ size_t KStringGetHash(KStringRef str) {
 bool KStringIsEqual(KStringRef lhs, KStringRef rhs) {
   if (!lhs || !rhs) {
     return false;
+  }
+  if (lhs == rhs) {
+    return true;
   }
   size_t lhs_len = KStringGetLength(lhs);
   size_t rhs_len = KStringGetLength(rhs);

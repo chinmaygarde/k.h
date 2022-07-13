@@ -1,27 +1,23 @@
 #pragma once
 
 #include "kmacros.h"
+#include "kobject.h"
 #include "ktypes.h"
 
 KEXTERN_C_BEGIN
 
-struct KString;
-typedef struct KString* KStringRef;
+K_DEF_OBJECT(KString);
 
 KPRINTF_FORMAT(1, 2)
 KStringRef KStringAllocWithFormat(const char* format, ...);
 
 KStringRef KStringAllocWithFormatV(const char* format, va_list args);
 
-void KStringRetain(KStringRef);
+size_t KStringGetLength(KStringRef string);
 
-void KStringRelease(KStringRef);
+const char* KStringGetData(KStringRef string);
 
-size_t KStringGetLength(KStringRef);
-
-const char* KStringGetData(KStringRef);
-
-size_t KStringGetHash(KStringRef str);
+size_t KStringGetHash(KStringRef string);
 
 bool KStringIsEqual(KStringRef lhs, KStringRef rhs);
 

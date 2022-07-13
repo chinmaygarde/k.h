@@ -5,18 +5,13 @@
 
 KEXTERN_C_BEGIN
 
-struct KThread;
-typedef struct KThread* KThreadRef;
+K_DEF_OBJECT(KThread);
 
 typedef void (*KThreadProc)(void*);
 
 KThreadRef KThreadAlloc(KThreadProc proc, void* user_data);
 
-void KThreadRetain(KThreadRef);
-
-void KThreadRelease(KThreadRef);
-
-void KThreadJoin(KThreadRef);
+void KThreadJoin(KThreadRef thread);
 
 size_t KThreadGetHardwareConcurrency();
 

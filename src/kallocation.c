@@ -23,14 +23,6 @@ KAllocationRef KAllocationAlloc() {
   return KObjectAlloc(&kAllocationClass);
 }
 
-void KAllocationRetain(KAllocationRef allocation) {
-  KObjectRetain(allocation);
-}
-
-void KAllocationRelease(KAllocationRef allocation) {
-  KObjectRelease(allocation);
-}
-
 bool KAllocationTruncate(KAllocationRef allocation, size_t size) {
   if (!allocation) {
     return false;

@@ -1,18 +1,14 @@
 #pragma once
 
 #include "kmacros.h"
+#include "kobject.h"
 #include "ktypes.h"
 
 KEXTERN_C_BEGIN
 
-struct KAllocation;
-typedef struct KAllocation* KAllocationRef;
+K_DEF_OBJECT(KAllocation);
 
 KAllocationRef KAllocationAlloc();
-
-void KAllocationRetain(KAllocationRef allocation);
-
-void KAllocationRelease(KAllocationRef allocation);
 
 bool KAllocationTruncate(KAllocationRef allocation, size_t size);
 

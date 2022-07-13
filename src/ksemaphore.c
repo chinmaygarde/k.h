@@ -88,14 +88,6 @@ KSemaphoreRef KSemaphoreAlloc(size_t count) {
   return sema;
 }
 
-void KSemaphoreRetain(KSemaphoreRef sema) {
-  KObjectRetain(sema);
-}
-
-void KSemaphoreRelease(KSemaphoreRef sema) {
-  KObjectRelease(sema);
-}
-
 bool KSemaphoreWait(KSemaphoreRef sema) {
   if (!sema) {
     return false;
