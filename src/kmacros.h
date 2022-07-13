@@ -33,14 +33,18 @@
 
 #endif
 
-#define K_DEF_OBJECT(obj)                     \
-  struct obj;                                 \
-  typedef struct obj* obj##Ref;               \
-  KEXTERN_C_BEGIN                             \
-  inline void obj##Retain(obj##Ref object) {  \
-    KObjectRetain(object);                    \
-  }                                           \
-  inline void obj##Release(obj##Ref object) { \
-    KObjectRelease(object);                   \
-  }                                           \
+#define K_DEF_OBJECT(obj)             \
+  struct obj;                         \
+  typedef struct obj* obj##Ref;       \
+  KEXTERN_C_BEGIN                     \
+  void obj##Retain(obj##Ref object);  \
+  void obj##Release(obj##Ref object); \
   KEXTERN_C_END
+
+#define K_IMPL_OBJECT(obj)             \
+  void obj##Retain(obj##Ref object) {  \
+    KObjectRetain(object);             \
+  }                                    \
+  void obj##Release(obj##Ref object) { \
+    KObjectRelease(object);            \
+  }

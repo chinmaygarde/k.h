@@ -11,6 +11,8 @@
 #include <semaphore.h>
 #endif  // K_OS_WIN
 
+K_IMPL_OBJECT(KSemaphore);
+
 struct KSemaphore {
 #if K_OS_WIN
   HANDLE handle;

@@ -8,6 +8,7 @@
 ///
 
 K_DEF_OBJECT(KMapEntry);
+K_IMPL_OBJECT(KMapEntry);
 
 struct KMapEntry {
   KObjectRef key;
@@ -45,6 +46,8 @@ static KMapEntryRef KMapEntryAlloc(KObjectRef key, KObjectRef value) {
 /// KMap Implementation
 ///
 static const size_t kMapInitialBucketsSize = 16u;
+
+K_IMPL_OBJECT(KMap);
 
 struct KMap {
   KMapHash hash;

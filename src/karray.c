@@ -2,6 +2,8 @@
 
 #include "kallocation.h"
 
+K_IMPL_OBJECT(KArray);
+
 struct KArray {
   size_t length;
   KAllocationRef items;

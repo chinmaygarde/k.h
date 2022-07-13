@@ -2,7 +2,7 @@
   "build_systems": [
     {
       "name": "KObject Build All",
-      "shell_cmd": "ninja && kobject_unittests",
+      "shell_cmd": "ninja && ./kobject_unittests",
       "working_dir": "${project_path}/build",
       "file_regex": "(.*):(\\d+):(\\d+)(.*)",
       "shell": true,

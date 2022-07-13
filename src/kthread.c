@@ -11,6 +11,8 @@
 #include <unistd.h>
 #endif  // K_OS_WIN
 
+K_IMPL_OBJECT(KThread);
+
 struct KThread {
   bool is_joined;
   KThreadProc main;

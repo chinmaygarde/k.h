@@ -3,6 +3,8 @@
 #include "kobject.h"
 #include "ksemaphore.h"
 
+K_IMPL_OBJECT(KMutex);
+
 struct KMutex {
   KSemaphoreRef sema;
 };

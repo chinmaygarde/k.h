@@ -4,6 +4,8 @@
 
 #include "kobject.h"
 
+K_IMPL_OBJECT(KAllocation);
+
 struct KAllocation {
   size_t size;
   void* buffer;

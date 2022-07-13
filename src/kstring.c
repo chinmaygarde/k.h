@@ -8,6 +8,8 @@
 #include "khash.h"
 #include "kobject.h"
 
+K_IMPL_OBJECT(KString);
+
 struct KString {
   size_t size;
   void* buffer;
