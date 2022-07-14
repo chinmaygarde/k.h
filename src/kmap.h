@@ -9,7 +9,6 @@ K_DEF_OBJECT(KMap);
 
 typedef size_t (*KMapHash)(KObjectRef object);
 typedef bool (*KMapEqual)(KObjectRef lhs, KObjectRef rhs);
-typedef bool (*KMapIterator)(KObjectRef key, KObjectRef value, void* user_data);
 
 KMapRef KMapAlloc(KMapHash hash, KMapEqual equal);
 
