@@ -73,7 +73,7 @@ static bool KConditionVariableWaitInternal(KConditionVariableRef cv) {
   if (!cv->is_valid) {
     return false;
   }
-  pthread_cond_wait(&cv->cv, &cv->mutex) == 0;
+  return pthread_cond_wait(&cv->cv, &cv->mutex) == 0;
 #endif  // K_OS_WIN
 }
 
