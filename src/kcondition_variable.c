@@ -9,8 +9,6 @@
 #include <pthread.h>
 #endif  // K_OS_WIN
 
-K_IMPL_OBJECT(KConditionVariable);
-
 struct KConditionVariable {
 #if K_OS_WIN
   CRITICAL_SECTION mutex;
@@ -22,9 +20,9 @@ struct KConditionVariable {
 #endif  // K_OS_WIN
 };
 
-void KConditionVariableInit(KConditionVariableRef cv) {}
+static void KConditionVariableInit(KConditionVariableRef cv) {}
 
-void KConditionVariableDeInit(KConditionVariableRef cv) {
+static void KConditionVariableDeInit(KConditionVariableRef cv) {
 #if K_OS_WIN
   DeleteCriticalSection(&cv->mutex);
 #else   // K_OS_WIN
@@ -35,18 +33,13 @@ void KConditionVariableDeInit(KConditionVariableRef cv) {
 #endif  // K_OS_WIN
 }
 
-static KClass KConditionVariableClass = {
-    .init = (KClassInit)(&KConditionVariableInit),
-    .deinit = (KClassInit)(&KConditionVariableDeInit),
-    .size = sizeof(struct KConditionVariable),
-};
+K_IMPL_OBJECT(KConditionVariable);
 
 KConditionVariableRef KConditionVariableAlloc() {
-  KConditionVariableRef cv = KObjectAlloc(&KConditionVariableClass);
+  KConditionVariableRef cv = KConditionVariableAllocPriv();
   if (!cv) {
     return NULL;
   }
-
 #if K_OS_WIN
   InitializeCriticalSection(&cv->mutex);
   InitializeConditionVariable(&cv->cv);
@@ -70,50 +63,40 @@ KConditionVariableRef KConditionVariableAlloc() {
   return cv;
 }
 
+static bool KConditionVariableWaitInternal(KConditionVariableRef cv) {
+  if (!cv) {
+    return false;
+  }
+#if K_OS_WIN
+  return SleepConditionVariableCS(&cv->cv, &cv->mutex, INFINITE) != 0;
+#else   // K_OS_WIN
+  if (!cv->is_valid) {
+    return false;
+  }
+  pthread_cond_wait(&cv->cv, &cv->mutex) == 0;
+#endif  // K_OS_WIN
+}
+
 bool KConditionVariableWait(KConditionVariableRef cv,
                             KConditionVariablePredicate pred,
                             void* user_data) {
   if (!cv || !pred) {
     return false;
   }
-
-#if K_OS_WIN
-  EnterCriticalSection(&cv->mutex);
-
+  if (!KConditionVariableCriticalSectionEnter(cv)) {
+    return false;
+  }
   bool success = false;
   do {
     if (!pred(user_data)) {
       success = true;
       break;
     }
-  } while (SleepConditionVariableCS(&cv->cv, &cv->mutex, INFINITE) != 0);
-
-  LeaveCriticalSection(&cv->mutex);
-
-  return success;
-#else   // K_OS_WIN
-  if (!cv->is_valid) {
-    return false;
-  }
-
-  if (pthread_mutex_lock(&cv->mutex) != 0) {
-    return false;
-  }
-
-  bool success = false;
-
-  do {
-    if (!pred(user_data)) {
-      success = true;
-      break;
-    }
-  } while (pthread_cond_wait(&cv->cv, &cv->mutex) == 0);
-
-  if (pthread_mutex_unlock(&cv->mutex) != 0) {
+  } while (KConditionVariableWaitInternal(cv));
+  if (!KConditionVariableCriticalSectionExit(cv)) {
     return false;
   }
   return success;
-#endif  // K_OS_WIN
 }
 
 bool KConditionVariableNotifyOne(KConditionVariableRef cv) {
@@ -145,5 +128,35 @@ bool KConditionVariableNotifyAll(KConditionVariableRef cv) {
     return false;
   }
   return pthread_cond_broadcast(&cv->cv) == 0;
+#endif  // K_OS_WIN
+}
+
+bool KConditionVariableCriticalSectionEnter(KConditionVariableRef cv) {
+  if (!cv) {
+    return false;
+  }
+#if K_OS_WIN
+  EnterCriticalSection(&cv->mutex);
+  return true;
+#else   // K_OS_WIN
+  if (!cv->is_valid) {
+    return false;
+  }
+  return pthread_mutex_lock(&cv->mutex) == 0;
+#endif  // K_OS_WIN
+}
+
+bool KConditionVariableCriticalSectionExit(KConditionVariableRef cv) {
+  if (!cv) {
+    return false;
+  }
+#if K_OS_WIN
+  LeaveCriticalSection(&cv->mutex);
+  return true;
+#else   // K_OS_WIN
+  if (!cv->is_valid) {
+    return false;
+  }
+  return pthread_mutex_unlock(&cv->mutex) == 0;
 #endif  // K_OS_WIN
 }

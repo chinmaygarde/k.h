@@ -20,4 +20,7 @@ size_t KArrayGetLength(KArrayRef array);
 
 size_t KArrayRemoveAllObjects(KArrayRef array);
 
+typedef bool (*KArrayIterator)(KObjectRef obj, size_t index, void* user_data);
+size_t KArrayIterate(KArrayRef array, KArrayIterator iterator, void* user_data);
+
 KEXTERN_C_END

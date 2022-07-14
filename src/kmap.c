@@ -8,7 +8,6 @@
 ///
 
 K_DEF_OBJECT(KMapEntry);
-K_IMPL_OBJECT(KMapEntry);
 
 struct KMapEntry {
   KObjectRef key;
@@ -22,16 +21,13 @@ static void KMapEntryDeInit(KMapEntryRef entry) {
   KObjectRelease(entry->value);
 }
 
+K_IMPL_OBJECT(KMapEntry);
+
 static KMapEntryRef KMapEntryAlloc(KObjectRef key, KObjectRef value) {
   if (!key || !value) {
     return NULL;
   }
-  static KClass kMapEntryClass = {
-      .init = (KClassInit)&KMapEntryInit,
-      .deinit = (KClassDeinit)&KMapEntryDeInit,
-      .size = sizeof(struct KMapEntry),
-  };
-  KMapEntryRef entry = KObjectAlloc(&kMapEntryClass);
+  KMapEntryRef entry = KMapEntryAllocPriv();
   if (!entry) {
     return NULL;
   }
@@ -49,8 +45,6 @@ static const size_t kMapInitialBucketsSize = 16u;
 static const double kMapMaxLoadFactor = 1.0;
 static const size_t kMapBucketGrowthFactor = 2;
 
-K_IMPL_OBJECT(KMap);
-
 struct KMap {
   KMapHash hash;
   KMapEqual equal;
@@ -58,17 +52,13 @@ struct KMap {
   size_t object_count;
 };
 
-void KMapInit(KMapRef map) {}
+static void KMapInit(KMapRef map) {}
 
-void KMapDeInit(KMapRef map) {
+static void KMapDeInit(KMapRef map) {
   KArrayRelease(map->buckets);
 }
 
-static KClass KMapClass = {
-    .init = (KClassInit)&KMapInit,
-    .deinit = (KClassDeinit)&KMapDeInit,
-    .size = sizeof(struct KMap),
-};
+K_IMPL_OBJECT(KMap);
 
 KMapRef KMapAllocWithBucketCount(KMapHash hash,
                                  KMapEqual equal,
@@ -77,7 +67,7 @@ KMapRef KMapAllocWithBucketCount(KMapHash hash,
     return NULL;
   }
 
-  KMapRef map = KObjectAlloc(&KMapClass);
+  KMapRef map = KMapAllocPriv();
   if (!map) {
     return NULL;
   }

@@ -11,8 +11,6 @@
 #include <semaphore.h>
 #endif  // K_OS_WIN
 
-K_IMPL_OBJECT(KSemaphore);
-
 struct KSemaphore {
 #if K_OS_WIN
   HANDLE handle;
@@ -45,14 +43,10 @@ void KSemaphoreDeInit(KSemaphoreRef sema) {
 #endif  // K_OS_WIN
 }
 
-static KClass KSemaphoreClass = {
-    .init = (KClassInit)&KSemaphoreInit,
-    .deinit = (KClassDeinit)&KSemaphoreDeInit,
-    .size = sizeof(struct KSemaphore),
-};
+K_IMPL_OBJECT(KSemaphore);
 
 KSemaphoreRef KSemaphoreAlloc(size_t count) {
-  KSemaphoreRef sema = KObjectAlloc(&KSemaphoreClass);
+  KSemaphoreRef sema = KSemaphoreAllocPriv();
   if (!sema) {
     return NULL;
   }

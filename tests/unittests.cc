@@ -285,3 +285,10 @@ TEST(KObjectTest, KConditionVariableAll) {
   KConditionVariableRelease(cv);
   KThreadRelease(thread);
 }
+
+TEST(KObjectTest, KWorkerPool) {
+  KWorkerPoolRef pool = KWorkerPoolAlloc(4u);
+  ASSERT_NE(pool, nullptr);
+  ASSERT_EQ(KWorkerPoolGetWorkerCount(pool), 4u);
+  KWorkerPoolRelease(pool);
+}

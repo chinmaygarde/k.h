@@ -4,8 +4,6 @@
 
 #include "kobject.h"
 
-K_IMPL_OBJECT(KAllocation);
-
 struct KAllocation {
   size_t size;
   void* buffer;
@@ -17,12 +15,10 @@ static void KAllocationDeInit(KAllocationRef allocation) {
   free(allocation->buffer);
 }
 
-static KClass kAllocationClass = {.init = (KClassInit)&KAllocationInit,
-                                  .deinit = (KClassDeinit)&KAllocationDeInit,
-                                  .size = sizeof(struct KAllocation)};
+K_IMPL_OBJECT(KAllocation);
 
 KAllocationRef KAllocationAlloc() {
-  return KObjectAlloc(&kAllocationClass);
+  return KAllocationAllocPriv();
 }
 
 bool KAllocationTruncate(KAllocationRef allocation, size_t size) {

@@ -3,8 +3,6 @@
 #include "kobject.h"
 #include "ksemaphore.h"
 
-K_IMPL_OBJECT(KMutex);
-
 struct KMutex {
   KSemaphoreRef sema;
 };
@@ -17,14 +15,10 @@ static void KMutexDeInit(KMutexRef mutex) {
   KSemaphoreRelease(mutex->sema);
 }
 
-static KClass kMutexClass = {
-    .init = (KClassInit)&KMutexInit,
-    .deinit = (KClassDeinit)&KMutexDeInit,
-    .size = sizeof(struct KMutex),
-};
+K_IMPL_OBJECT(KMutex);
 
 KMutexRef KMutexAlloc() {
-  KMutexRef mutex = KObjectAlloc(&kMutexClass);
+  KMutexRef mutex = KMutexAllocPriv();
   if (!mutex) {
     return NULL;
   }

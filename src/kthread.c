@@ -12,8 +12,6 @@
 #include <unistd.h>
 #endif  // K_OS_WIN
 
-K_IMPL_OBJECT(KThread);
-
 struct KThread {
   bool is_joined;
   KThreadProc main;
@@ -38,11 +36,7 @@ static void KThreadDeInit(KThreadRef thread) {
   KThreadJoin(thread);
 }
 
-static KClass KThreadClass = {
-    .init = (KClassInit)&KThreadInit,
-    .deinit = (KClassDeinit)&KThreadDeInit,
-    .size = sizeof(struct KThread),
-};
+K_IMPL_OBJECT(KThread);
 
 #if K_OS_WIN
 static DWORD KThreadMain(LPVOID arg)
@@ -67,7 +61,7 @@ KThreadRef KThreadAlloc(KThreadProc proc, void* user_data) {
     return NULL;
   }
 
-  KThreadRef thread = KObjectAlloc(&KThreadClass);
+  KThreadRef thread = KThreadAllocPriv();
   if (!thread) {
     return NULL;
   }

@@ -8,8 +8,6 @@
 #include "khash.h"
 #include "kobject.h"
 
-K_IMPL_OBJECT(KString);
-
 struct KString {
   size_t size;
   void* buffer;
@@ -17,13 +15,11 @@ struct KString {
 
 static void KStringInit(struct KString* str) {}
 
-static void KStringDeinit(struct KString* str) {
+static void KStringDeInit(struct KString* str) {
   free(str->buffer);
 }
 
-static KClass kStringClass = {.init = (KClassInit)&KStringInit,
-                              .deinit = (KClassDeinit)&KStringDeinit,
-                              .size = sizeof(struct KString)};
+K_IMPL_OBJECT(KString);
 
 KStringRef KStringAllocWithFormat(const char* format, ...) {
   va_list args;
@@ -34,7 +30,7 @@ KStringRef KStringAllocWithFormat(const char* format, ...) {
 }
 
 KStringRef KStringAllocWithFormatV(const char* format, va_list args) {
-  KStringRef str = KObjectAlloc(&kStringClass);
+  KStringRef str = KStringAllocPriv();
 
   if (!str) {
     return NULL;

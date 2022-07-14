@@ -2,8 +2,6 @@
 
 #include "kallocation.h"
 
-K_IMPL_OBJECT(KArray);
-
 struct KArray {
   size_t length;
   KAllocationRef items;
@@ -13,19 +11,15 @@ static void KArrayInit(KArrayRef array) {
   array->items = KAllocationAlloc();
 }
 
-static void KArrayDeinit(KArrayRef array) {
+static void KArrayDeInit(KArrayRef array) {
   KArrayRemoveAllObjects(array);
   KAllocationRelease(array->items);
 }
 
-static KClass kArrayClass = {
-    .init = (KClassInit)&KArrayInit,
-    .deinit = (KClassDeinit)&KArrayDeinit,
-    .size = sizeof(struct KArray),
-};
+K_IMPL_OBJECT(KArray);
 
 KArrayRef KArrayAlloc() {
-  KArrayRef array = KObjectAlloc(&kArrayClass);
+  KArrayRef array = KArrayAllocPriv();
   if (!array || !array->items) {
     KObjectRelease(array);
     return NULL;
@@ -69,6 +63,9 @@ KObjectRef KArrayGetObjectAtIndex(KArrayRef array, size_t index) {
 }
 
 size_t KArrayGetLength(KArrayRef array) {
+  if (!array) {
+    return 0;
+  }
   return array->length;
 }
 
@@ -80,4 +77,20 @@ size_t KArrayRemoveAllObjects(KArrayRef array) {
   size_t removed = array->length;
   array->length = 0u;
   return removed;
+}
+
+size_t KArrayIterate(KArrayRef array,
+                     KArrayIterator iterator,
+                     void* user_data) {
+  if (!array || !iterator) {
+    return 0u;
+  }
+  size_t iterated = 0;
+  for (size_t i = 0, count = KArrayGetLength(array); i < count; i++) {
+    iterated++;
+    if (!iterator(KArrayGetObjectAtIndex(array, i), i, user_data)) {
+      break;
+    }
+  }
+  return iterated;
 }

@@ -19,4 +19,8 @@ bool KConditionVariableNotifyOne(KConditionVariableRef cv);
 
 bool KConditionVariableNotifyAll(KConditionVariableRef cv);
 
+bool KConditionVariableCriticalSectionEnter(KConditionVariableRef cv);
+
+bool KConditionVariableCriticalSectionExit(KConditionVariableRef cv);
+
 KEXTERN_C_END

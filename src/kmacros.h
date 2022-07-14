@@ -41,10 +41,20 @@
   void obj##Release(obj##Ref object); \
   KEXTERN_C_END
 
-#define K_IMPL_OBJECT(obj)             \
-  void obj##Retain(obj##Ref object) {  \
-    KObjectRetain(object);             \
-  }                                    \
-  void obj##Release(obj##Ref object) { \
-    KObjectRelease(object);            \
+#define K_IMPL_OBJECT(obj)                  \
+  void obj##Retain(obj##Ref object) {       \
+    KObjectRetain(object);                  \
+  }                                         \
+  void obj##Release(obj##Ref object) {      \
+    KObjectRelease(object);                 \
+  }                                         \
+  void obj##Init(obj##Ref obj);             \
+  void obj##DeInit(obj##Ref obj);           \
+  static KClass obj##ClassDef = {           \
+      .init = (KClassInit)&obj##Init,       \
+      .deinit = (KClassDeinit)&obj##DeInit, \
+      .size = sizeof(struct obj),           \
+  };                                        \
+  obj##Ref obj##AllocPriv() {               \
+    return KObjectAlloc(&obj##ClassDef);    \
   }

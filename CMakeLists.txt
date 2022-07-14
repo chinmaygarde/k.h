@@ -50,6 +50,8 @@ add_library(kobject
   src/ktime.c
   src/ktime.h
   src/ktypes.h
+  src/kworker_pool.c
+  src/kworker_pool.h
 )
 
 target_include_directories(kobject
