@@ -14,7 +14,9 @@
 
 #include "kallocation.h"
 #include "karray.h"
+#include "kcondition_variable.h"
 #include "kmap.h"
 #include "kmutex.h"
 #include "kstring.h"
 #include "kthread.h"
+#include "ktime.h"

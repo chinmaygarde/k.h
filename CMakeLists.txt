@@ -47,6 +47,8 @@ add_library(kobject
   src/kstring.h
   src/kthread.c
   src/kthread.h
+  src/ktime.c
+  src/ktime.h
   src/ktypes.h
 )
 

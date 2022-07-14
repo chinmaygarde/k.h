@@ -58,6 +58,9 @@ void KLogString(KLogLevel level, KStringRef str) {
     }
   }
   printf(format_str, KStringGetData(str));
+#if K_OS_WIN
+  fflush(stdout);
+#endif  // K_OS_WIN
 }
 
 void KLog(KLogLevel level, const char* format, ...) {
