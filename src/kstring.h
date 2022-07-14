@@ -9,9 +9,9 @@ KEXTERN_C_BEGIN
 K_DEF_OBJECT(KString);
 
 KPRINTF_FORMAT(1, 2)
-KStringRef KStringAllocWithFormat(const char* format, ...);
+KStringRef KStringNewWithFormat(const char* format, ...);
 
-KStringRef KStringAllocWithFormatV(const char* format, va_list args);
+KStringRef KStringNewWithFormatV(const char* format, va_list args);
 
 size_t KStringGetLength(KStringRef string);
 

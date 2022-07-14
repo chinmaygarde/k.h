@@ -8,7 +8,7 @@ KEXTERN_C_BEGIN
 
 K_DEF_OBJECT(KSemaphore);
 
-KSemaphoreRef KSemaphoreAlloc(size_t count);
+KSemaphoreRef KSemaphoreNew(size_t count);
 
 bool KSemaphoreWait(KSemaphoreRef semaphore);
 

@@ -17,8 +17,8 @@ static void KAllocationDeInit(KAllocationRef allocation) {
 
 K_IMPL_OBJECT(KAllocation);
 
-KAllocationRef KAllocationAlloc() {
-  return KAllocationAllocPriv();
+KAllocationRef KAllocationNew() {
+  return KAllocationAlloc();
 }
 
 bool KAllocationTruncate(KAllocationRef allocation, size_t size) {

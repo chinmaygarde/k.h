@@ -8,7 +8,7 @@ struct KMutex {
 };
 
 static void KMutexInit(KMutexRef mutex) {
-  mutex->sema = KSemaphoreAlloc(1u);
+  mutex->sema = KSemaphoreNew(1u);
 }
 
 static void KMutexDeInit(KMutexRef mutex) {
@@ -17,8 +17,8 @@ static void KMutexDeInit(KMutexRef mutex) {
 
 K_IMPL_OBJECT(KMutex);
 
-KMutexRef KMutexAlloc() {
-  KMutexRef mutex = KMutexAllocPriv();
+KMutexRef KMutexNew() {
+  KMutexRef mutex = KMutexAlloc();
   if (!mutex) {
     return NULL;
   }

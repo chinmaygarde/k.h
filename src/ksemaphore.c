@@ -45,8 +45,8 @@ void KSemaphoreDeInit(KSemaphoreRef sema) {
 
 K_IMPL_OBJECT(KSemaphore);
 
-KSemaphoreRef KSemaphoreAlloc(size_t count) {
-  KSemaphoreRef sema = KSemaphoreAllocPriv();
+KSemaphoreRef KSemaphoreNew(size_t count) {
+  KSemaphoreRef sema = KSemaphoreAlloc();
   if (!sema) {
     return NULL;
   }

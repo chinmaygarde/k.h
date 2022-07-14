@@ -18,7 +18,7 @@ typedef struct KClass {
 
 struct KControlBlock;
 
-KObjectRef KObjectAlloc(const KClass* clasz);
+KObjectRef KObjectNew(const KClass* clasz);
 
 void KObjectRetain(KObjectRef obj);
 

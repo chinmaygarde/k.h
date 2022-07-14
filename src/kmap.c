@@ -23,11 +23,11 @@ static void KMapEntryDeInit(KMapEntryRef entry) {
 
 K_IMPL_OBJECT(KMapEntry);
 
-static KMapEntryRef KMapEntryAlloc(KObjectRef key, KObjectRef value) {
+static KMapEntryRef KMapEntryNew(KObjectRef key, KObjectRef value) {
   if (!key || !value) {
     return NULL;
   }
-  KMapEntryRef entry = KMapEntryAllocPriv();
+  KMapEntryRef entry = KMapEntryAlloc();
   if (!entry) {
     return NULL;
   }
@@ -67,19 +67,19 @@ KMapRef KMapAllocWithBucketCount(KMapHash hash,
     return NULL;
   }
 
-  KMapRef map = KMapAllocPriv();
+  KMapRef map = KMapAlloc();
   if (!map) {
     return NULL;
   }
 
-  map->buckets = KArrayAlloc();
+  map->buckets = KArrayNew();
   if (!map->buckets) {
     KMapRelease(map);
     return NULL;
   }
 
   for (size_t i = 0; i < bucket_count; i++) {
-    KArrayRef bucket = KArrayAlloc();
+    KArrayRef bucket = KArrayNew();
     if (!bucket) {
       KMapRelease(map);
       return NULL;
@@ -98,7 +98,7 @@ KMapRef KMapAllocWithBucketCount(KMapHash hash,
   return map;
 }
 
-KMapRef KMapAlloc(KMapHash hash, KMapEqual equal) {
+KMapRef KMapNew(KMapHash hash, KMapEqual equal) {
   return KMapAllocWithBucketCount(hash, equal, kMapInitialBucketsSize);
 }
 
@@ -191,7 +191,7 @@ static bool KMapSetValueNoRehash(KMapRef map,
   }
 
   // No collisions. Update count.
-  KMapEntryRef new_entry = KMapEntryAlloc(key, value);
+  KMapEntryRef new_entry = KMapEntryNew(key, value);
   bool added = KArrayAddObject(bucket, new_entry);
   KMapEntryRelease(new_entry);
   if (added) {

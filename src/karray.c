@@ -8,7 +8,7 @@ struct KArray {
 };
 
 static void KArrayInit(KArrayRef array) {
-  array->items = KAllocationAlloc();
+  array->items = KAllocationNew();
 }
 
 static void KArrayDeInit(KArrayRef array) {
@@ -18,8 +18,8 @@ static void KArrayDeInit(KArrayRef array) {
 
 K_IMPL_OBJECT(KArray);
 
-KArrayRef KArrayAlloc() {
-  KArrayRef array = KArrayAllocPriv();
+KArrayRef KArrayNew() {
+  KArrayRef array = KArrayAlloc();
   if (!array || !array->items) {
     KObjectRelease(array);
     return NULL;

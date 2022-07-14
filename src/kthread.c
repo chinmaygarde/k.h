@@ -56,12 +56,12 @@ static void* KThreadMain(void* arg)
   return 0;
 }
 
-KThreadRef KThreadAlloc(KThreadProc proc, void* user_data) {
+KThreadRef KThreadNew(KThreadProc proc, void* user_data) {
   if (!proc) {
     return NULL;
   }
 
-  KThreadRef thread = KThreadAllocPriv();
+  KThreadRef thread = KThreadAlloc();
   if (!thread) {
     return NULL;
   }

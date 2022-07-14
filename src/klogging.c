@@ -66,7 +66,7 @@ void KLogString(KLogLevel level, KStringRef str) {
 void KLog(KLogLevel level, const char* format, ...) {
   va_list args;
   va_start(args, format);
-  KStringRef str = KStringAllocWithFormatV(format, args);
+  KStringRef str = KStringNewWithFormatV(format, args);
   va_end(args);
   KLogString(level, str);
   KStringRelease(str);
@@ -79,7 +79,7 @@ void KLogFileLine(KLogLevel level,
                   ...) {
   va_list args;
   va_start(args, format);
-  KStringRef str = KStringAllocWithFormatV(format, args);
+  KStringRef str = KStringNewWithFormatV(format, args);
   va_end(args);
   KLog(level, "%s:%d %s", file, line, KStringGetData(str));
   KStringRelease(str);

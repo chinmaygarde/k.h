@@ -8,7 +8,7 @@ KEXTERN_C_BEGIN
 
 K_DEF_OBJECT(KArray);
 
-KArrayRef KArrayAlloc();
+KArrayRef KArrayNew();
 
 bool KArrayAddObject(KArrayRef array, KObjectRef object);
 

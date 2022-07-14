@@ -9,7 +9,7 @@ K_DEF_OBJECT(KConditionVariable);
 
 typedef bool (*KConditionVariablePredicate)(void* user_data);
 
-KConditionVariableRef KConditionVariableAlloc();
+KConditionVariableRef KConditionVariableNew();
 
 bool KConditionVariableWait(KConditionVariableRef cv,
                             KConditionVariablePredicate pred,

@@ -20,7 +20,7 @@ typedef struct KControlBlock {
 #endif  // K_OS_WIN
 } KControlBlock;
 
-KObjectRef KObjectAlloc(const KClass* clasz) {
+KObjectRef KObjectNew(const KClass* clasz) {
   void* allocation = calloc(1u, sizeof(KControlBlock) + clasz->size);
   if (allocation == NULL) {
     return NULL;

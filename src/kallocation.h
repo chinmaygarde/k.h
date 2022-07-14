@@ -8,7 +8,7 @@ KEXTERN_C_BEGIN
 
 K_DEF_OBJECT(KAllocation);
 
-KAllocationRef KAllocationAlloc();
+KAllocationRef KAllocationNew();
 
 bool KAllocationTruncate(KAllocationRef allocation, size_t size);
 

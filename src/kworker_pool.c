@@ -58,16 +58,16 @@ void KWorkerPoolDeInit(KWorkerPoolRef pool) {
 
 static void KWorkerPoolWorkerMain(KWorkerPoolRef pool) {}
 
-KWorkerPoolRef KWorkerPoolAlloc(size_t worker_count) {
-  KWorkerPoolRef pool = KWorkerPoolAllocPriv();
+KWorkerPoolRef KWorkerPoolNew(size_t worker_count) {
+  KWorkerPoolRef pool = KWorkerPoolAlloc();
   if (!pool) {
     return NULL;
   }
-  pool->cv = KConditionVariableAlloc();
-  pool->workers = KArrayAlloc();
-  pool->tasks = KArrayAlloc();
+  pool->cv = KConditionVariableNew();
+  pool->workers = KArrayNew();
+  pool->tasks = KArrayNew();
   for (size_t i = 0; i < worker_count; i++) {
-    KThreadRef thread = KThreadAlloc((KThreadProc)&KWorkerPoolWorkerMain, pool);
+    KThreadRef thread = KThreadNew((KThreadProc)&KWorkerPoolWorkerMain, pool);
     KArrayAddObject(pool->workers, thread);
     KThreadRelease(thread);
   }

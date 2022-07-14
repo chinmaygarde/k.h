@@ -35,8 +35,8 @@ static void KConditionVariableDeInit(KConditionVariableRef cv) {
 
 K_IMPL_OBJECT(KConditionVariable);
 
-KConditionVariableRef KConditionVariableAlloc() {
-  KConditionVariableRef cv = KConditionVariableAllocPriv();
+KConditionVariableRef KConditionVariableNew() {
+  KConditionVariableRef cv = KConditionVariableAlloc();
   if (!cv) {
     return NULL;
   }

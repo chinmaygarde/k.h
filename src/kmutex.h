@@ -8,7 +8,7 @@ KEXTERN_C_BEGIN
 
 K_DEF_OBJECT(KMutex);
 
-KMutexRef KMutexAlloc();
+KMutexRef KMutexNew();
 
 bool KMutexLock(KMutexRef mutex);
 

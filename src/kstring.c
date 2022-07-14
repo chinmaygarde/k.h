@@ -21,16 +21,16 @@ static void KStringDeInit(struct KString* str) {
 
 K_IMPL_OBJECT(KString);
 
-KStringRef KStringAllocWithFormat(const char* format, ...) {
+KStringRef KStringNewWithFormat(const char* format, ...) {
   va_list args;
   va_start(args, format);
-  KStringRef str = KStringAllocWithFormatV(format, args);
+  KStringRef str = KStringNewWithFormatV(format, args);
   va_end(args);
   return str;
 }
 
-KStringRef KStringAllocWithFormatV(const char* format, va_list args) {
-  KStringRef str = KStringAllocPriv();
+KStringRef KStringNewWithFormatV(const char* format, va_list args) {
+  KStringRef str = KStringAlloc();
 
   if (!str) {
     return NULL;

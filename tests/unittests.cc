@@ -22,7 +22,7 @@ TEST(KObjectTest, Main) {
 
   ASSERT_FALSE(hello);
   ASSERT_EQ(goodbye, 0);
-  KObjectRef obj = KObjectAlloc(&my_class);
+  KObjectRef obj = KObjectNew(&my_class);
   ASSERT_EQ(KObjectGetRetainCount(obj), 1u);
   ASSERT_EQ(((MyStruct*)obj)->stuff, 0u);  // Zero initialization.
   ((MyStruct*)obj)->stuff = 42;
@@ -42,7 +42,7 @@ TEST(KObjectTest, Main) {
 }
 
 TEST(KObjectTest, KString) {
-  KStringRef str = KStringAllocWithFormat("Hello %s", "World!");
+  KStringRef str = KStringNewWithFormat("Hello %s", "World!");
   ASSERT_NE(str, nullptr);
   ASSERT_EQ(KObjectGetRetainCount(str), 1u);
   ASSERT_EQ(KStringGetLength(str), 12u);
@@ -52,7 +52,7 @@ TEST(KObjectTest, KString) {
 }
 
 TEST(KObjectTest, KAllocation) {
-  KAllocationRef alloc = KAllocationAlloc();
+  KAllocationRef alloc = KAllocationNew();
   ASSERT_NE(alloc, nullptr);
   ASSERT_EQ(KObjectGetRetainCount(alloc), 1u);
   ASSERT_EQ(KAllocationGetSize(alloc), 0u);
@@ -88,10 +88,10 @@ TEST(KObjectTest, KArray) {
   my_class.deinit = [](void*) { dealloc_count++; };
   my_class.size = sizeof(MyStruct);
 
-  KArrayRef array = KArrayAlloc();
+  KArrayRef array = KArrayNew();
   ASSERT_EQ(alloc_count, 0u);
   ASSERT_EQ(dealloc_count, 0u);
-  KObjectRef object = KObjectAlloc(&my_class);
+  KObjectRef object = KObjectNew(&my_class);
   ASSERT_EQ(alloc_count, 1u);
   ASSERT_EQ(dealloc_count, 0u);
   ASSERT_EQ(KArrayGetLength(array), 0u);
@@ -105,8 +105,8 @@ TEST(KObjectTest, KArray) {
   KArrayRelease(array);
   ASSERT_EQ(alloc_count, 1u);
   ASSERT_EQ(dealloc_count, 1u);
-  array = KArrayAlloc();
-  KObjectRef object2 = KObjectAlloc(&my_class);
+  array = KArrayNew();
+  KObjectRef object2 = KObjectNew(&my_class);
   ASSERT_EQ(alloc_count, 2u);
   ASSERT_EQ(dealloc_count, 1u);
   ASSERT_TRUE(KArrayAddObject(array, object2));
@@ -134,7 +134,7 @@ TEST(KObjectTest, KARP) {
   my_class.deinit = [](void* obj) { dealloc_count++; };
   my_class.size = sizeof(MyStruct);
 
-  KObjectRef object = KObjectAlloc(&my_class);
+  KObjectRef object = KObjectNew(&my_class);
   ASSERT_EQ(alloc_count, 1u);
   ASSERT_EQ(dealloc_count, 0u);
   ASSERT_EQ(KAutoreleasePoolPop(), 0u);
@@ -162,16 +162,16 @@ TEST(KObjectTest, KLogging) {
 }
 
 TEST(KObjectTest, KHash) {
-  KStringRef a = KStringAllocWithFormat("Hello");
-  KStringRef b = KStringAllocWithFormat("Hello");
+  KStringRef a = KStringNewWithFormat("Hello");
+  KStringRef b = KStringNewWithFormat("Hello");
   ASSERT_EQ(KStringGetHash(a), KStringGetHash(b));
   KStringRelease(a);
   KStringRelease(b);
 }
 
 TEST(KObjectTest, KEqual) {
-  KStringRef a = KStringAllocWithFormat("Hello");
-  KStringRef b = KStringAllocWithFormat("Hello");
+  KStringRef a = KStringNewWithFormat("Hello");
+  KStringRef b = KStringNewWithFormat("Hello");
   ASSERT_TRUE(KStringIsEqual(a, b));
   KStringRelease(a);
   KStringRelease(b);
@@ -183,10 +183,10 @@ TEST(KObjectTest, KThread) {
     const char* argument;
   } captures = {};
   captures.argument = "Hello";
-  captures.mutex = KMutexAlloc();
+  captures.mutex = KMutexNew();
   ASSERT_NE(captures.mutex, nullptr);
   ASSERT_TRUE(KMutexLock(captures.mutex));
-  KThreadRef thread = KThreadAlloc(
+  KThreadRef thread = KThreadNew(
       [](void* arg) {
         Captures* captures = (Captures*)(arg);
         K_LOG_INFO("Thread says: %s", captures->argument);
@@ -206,24 +206,23 @@ TEST(KObjectTest, KHardwareConcurrency) {
 }
 
 TEST(KObjectTest, KMap) {
-  KMapRef map =
-      KMapAlloc((KMapHash)&KStringGetHash, (KMapEqual)&KStringIsEqual);
+  KMapRef map = KMapNew((KMapHash)&KStringGetHash, (KMapEqual)&KStringIsEqual);
   ASSERT_EQ(KMapGetCount(map), 0u);
-  KStringRef value = KStringAllocWithFormat("MyValue");
+  KStringRef value = KStringNewWithFormat("MyValue");
   for (size_t i = 0; i < 1000; i++) {
-    KStringRef key = KStringAllocWithFormat("Key%zu", i);
+    KStringRef key = KStringNewWithFormat("Key%zu", i);
     ASSERT_TRUE(KMapSetValue(map, key, value));
     KStringRelease(key);
   }
   for (size_t i = 0; i < 1000; i++) {
-    KStringRef key = KStringAllocWithFormat("Key%zu", i);
+    KStringRef key = KStringNewWithFormat("Key%zu", i);
     KStringRef found_value = (KStringRef)KMapGetValue(map, key);
     ASSERT_NE(found_value, nullptr);
     ASSERT_TRUE(KStringIsEqual(found_value, value));
     KStringRelease(key);
   }
   for (size_t i = 0; i < 1000; i++) {
-    KStringRef key = KStringAllocWithFormat("Key%zu", i);
+    KStringRef key = KStringNewWithFormat("Key%zu", i);
     ASSERT_TRUE(KMapRemoveValue(map, key));
     KStringRelease(key);
   }
@@ -242,10 +241,10 @@ TEST(KObjectTest, KTimeAndSleep) {
 
 TEST(KObjectTest, KConditionVariableOne) {
   static const double kSleepTime = 0.5;
-  KConditionVariableRef cv = KConditionVariableAlloc();
+  KConditionVariableRef cv = KConditionVariableNew();
   ASSERT_NE(cv, nullptr);
   double time = KTimeGetCurrentSeconds();
-  KThreadRef thread = KThreadAlloc(
+  KThreadRef thread = KThreadNew(
       [](void* user_data) {
         KThreadSleepSeconds(kSleepTime);
         ASSERT_TRUE(
@@ -265,10 +264,10 @@ TEST(KObjectTest, KConditionVariableOne) {
 
 TEST(KObjectTest, KConditionVariableAll) {
   static const double kSleepTime = 0.5;
-  KConditionVariableRef cv = KConditionVariableAlloc();
+  KConditionVariableRef cv = KConditionVariableNew();
   ASSERT_NE(cv, nullptr);
   double time = KTimeGetCurrentSeconds();
-  KThreadRef thread = KThreadAlloc(
+  KThreadRef thread = KThreadNew(
       [](void* user_data) {
         KThreadSleepSeconds(kSleepTime);
         ASSERT_TRUE(
@@ -287,7 +286,7 @@ TEST(KObjectTest, KConditionVariableAll) {
 }
 
 TEST(KObjectTest, KWorkerPool) {
-  KWorkerPoolRef pool = KWorkerPoolAlloc(4u);
+  KWorkerPoolRef pool = KWorkerPoolNew(4u);
   ASSERT_NE(pool, nullptr);
   ASSERT_EQ(KWorkerPoolGetWorkerCount(pool), 4u);
   KWorkerPoolRelease(pool);

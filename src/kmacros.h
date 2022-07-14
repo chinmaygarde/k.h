@@ -55,6 +55,6 @@
       .deinit = (KClassDeinit)&obj##DeInit, \
       .size = sizeof(struct obj),           \
   };                                        \
-  obj##Ref obj##AllocPriv() {               \
-    return KObjectAlloc(&obj##ClassDef);    \
+  obj##Ref obj##Alloc() {                   \
+    return KObjectNew(&obj##ClassDef);      \
   }

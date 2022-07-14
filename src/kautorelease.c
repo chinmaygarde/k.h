@@ -9,7 +9,7 @@ bool KAutoreleasePoolAddObject(KObjectRef obj) {
     return false;
   }
   if (!tPool) {
-    tPool = KArrayAlloc();
+    tPool = KArrayNew();
   }
   return KArrayAddObject(tPool, obj);
 }

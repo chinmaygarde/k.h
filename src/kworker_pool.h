@@ -9,7 +9,7 @@ K_DEF_OBJECT(KWorkerPool);
 
 typedef void (*KWorkerPoolTask)(KObjectRef user_data);
 
-KWorkerPoolRef KWorkerPoolAlloc(size_t worker_count);
+KWorkerPoolRef KWorkerPoolNew(size_t worker_count);
 
 bool KWorkerPoolPostTask(KWorkerPoolRef pool,
                          KWorkerPoolTask task,
