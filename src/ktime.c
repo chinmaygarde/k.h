@@ -11,8 +11,8 @@
 
 double KTimeGetCurrentSeconds() {
 #if K_OS_WIN
-  LARGE_INTEGER counter = {};
-  LARGE_INTEGER frequency = {};
+  LARGE_INTEGER counter;
+  LARGE_INTEGER frequency;
   BOOL counter_result = QueryPerformanceCounter(&counter);
   BOOL frequency_result = QueryPerformanceFrequency(&frequency);
   K_ASSERT(counter_result && frequency_result);
