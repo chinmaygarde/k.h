@@ -230,3 +230,58 @@ TEST(KObjectTest, KMap) {
   KMapRelease(map);
   KStringRelease(value);
 }
+
+TEST(KObjectTest, KTimeAndSleep) {
+  const double kSleepTime = 0.1;
+  for (size_t i = 0; i < 5; i++) {
+    double time = KTimeGetCurrentSeconds();
+    KThreadSleepSeconds(kSleepTime);
+    ASSERT_GE(KTimeGetCurrentSeconds() - time, kSleepTime);
+  }
+}
+
+TEST(KObjectTest, KConditionVariableOne) {
+  static const double kSleepTime = 0.5;
+  KConditionVariableRef cv = KConditionVariableAlloc();
+  ASSERT_NE(cv, nullptr);
+  double time = KTimeGetCurrentSeconds();
+  KThreadRef thread = KThreadAlloc(
+      [](void* user_data) {
+        KThreadSleepSeconds(kSleepTime);
+        ASSERT_TRUE(
+            KConditionVariableNotifyOne((KConditionVariableRef)user_data));
+      },
+      cv);
+  ASSERT_TRUE(KConditionVariableWait(
+      cv,
+      [](void* user_data) -> bool {
+        return KTimeGetCurrentSeconds() - *((double*)user_data) < kSleepTime;
+      },
+      &time));
+  ASSERT_GE(KTimeGetCurrentSeconds() - time, kSleepTime);
+  KConditionVariableRelease(cv);
+  KThreadRelease(thread);
+}
+
+TEST(KObjectTest, KConditionVariableAll) {
+  static const double kSleepTime = 0.5;
+  KConditionVariableRef cv = KConditionVariableAlloc();
+  ASSERT_NE(cv, nullptr);
+  double time = KTimeGetCurrentSeconds();
+  KThreadRef thread = KThreadAlloc(
+      [](void* user_data) {
+        KThreadSleepSeconds(kSleepTime);
+        ASSERT_TRUE(
+            KConditionVariableNotifyAll((KConditionVariableRef)user_data));
+      },
+      cv);
+  ASSERT_TRUE(KConditionVariableWait(
+      cv,
+      [](void* user_data) -> bool {
+        return KTimeGetCurrentSeconds() - *((double*)user_data) < kSleepTime;
+      },
+      &time));
+  ASSERT_GE(KTimeGetCurrentSeconds() - time, kSleepTime);
+  KConditionVariableRelease(cv);
+  KThreadRelease(thread);
+}

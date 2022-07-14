@@ -15,4 +15,6 @@ void KThreadJoin(KThreadRef thread);
 
 size_t KThreadGetHardwareConcurrency();
 
+void KThreadSleepSeconds(double seconds);
+
 KEXTERN_C_END

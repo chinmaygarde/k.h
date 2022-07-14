@@ -8,6 +8,7 @@
 #include <Windows.h>
 #else  // K_OS_WIN
 #include <pthread.h>
+#include <time.h>
 #include <unistd.h>
 #endif  // K_OS_WIN
 
@@ -150,4 +151,26 @@ size_t KThreadGetHardwareConcurrency() {
   }
   return result;
 #endif  // K_OS_WIN
+}
+
+static void KThreadSleepNS(size_t ns) {
+  if (ns == 0) {
+    return;
+  }
+#if K_OS_WIN
+  Sleep(ns / 1e6);
+#else   // K_OS_WIN
+
+  static const uint64_t kNanosPerSec = 1e9;
+  struct timespec ts = {};
+  ts.tv_sec = ns / kNanosPerSec;
+  ts.tv_nsec = ns % kNanosPerSec;
+  while (nanosleep(&ts, &ts) == -1 && errno == EINTR) {
+    // Nothing to do.
+  }
+#endif  // K_OS_WIN
+}
+
+void KThreadSleepSeconds(double seconds) {
+  KThreadSleepNS(seconds * 1e9);
 }
