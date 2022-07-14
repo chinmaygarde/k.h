@@ -3,7 +3,7 @@
 #include "kmacros.h"
 #include "kstring.h"
 
-KEXTERN_C_BEGIN
+K_EXTERN_C_BEGIN
 
 typedef enum KLogLevel {
   KLogLevelInfo,
@@ -11,12 +11,12 @@ typedef enum KLogLevel {
   KLogLevelError,
 } KLogLevel;
 
-KPRINTF_FORMAT(2, 3)
+K_PRINTF_FORMAT(2, 3)
 void KLog(KLogLevel level, const char* format, ...);
 
 void KLogString(KLogLevel level, KStringRef string);
 
-KPRINTF_FORMAT(4, 5)
+K_PRINTF_FORMAT(4, 5)
 void KLogFileLine(KLogLevel level,
                   const char* file,
                   int line,
@@ -40,4 +40,4 @@ void KLogFileLine(KLogLevel level,
 #define K_DLOG_ERROR(...)
 #endif  // NDEBUG
 
-KEXTERN_C_END
+K_EXTERN_C_END

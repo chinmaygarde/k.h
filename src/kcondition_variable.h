@@ -3,7 +3,7 @@
 #include "kmacros.h"
 #include "ktypes.h"
 
-KEXTERN_C_BEGIN
+K_EXTERN_C_BEGIN
 
 K_DEF_OBJECT(KConditionVariable);
 
@@ -23,4 +23,4 @@ bool KConditionVariableCriticalSectionEnter(KConditionVariableRef cv);
 
 bool KConditionVariableCriticalSectionExit(KConditionVariableRef cv);
 
-KEXTERN_C_END
+K_EXTERN_C_END

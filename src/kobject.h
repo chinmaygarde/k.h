@@ -3,7 +3,7 @@
 #include "kmacros.h"
 #include "ktypes.h"
 
-KEXTERN_C_BEGIN
+K_EXTERN_C_BEGIN
 
 typedef void* KObjectRef;
 
@@ -26,4 +26,4 @@ void KObjectRelease(KObjectRef obj);
 
 size_t KObjectGetRetainCount(KObjectRef obj);
 
-KEXTERN_C_END
+K_EXTERN_C_END

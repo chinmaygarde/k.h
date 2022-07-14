@@ -285,6 +285,81 @@ TEST(KObjectTest, KConditionVariableAll) {
   KThreadRelease(thread);
 }
 
+TEST(KObjectTest, KList) {
+  KListRef list = KListNew();
+  ASSERT_NE(list, nullptr);
+
+  KStringRef a = KStringNewWithFormat("A");
+  KStringRef b = KStringNewWithFormat("B");
+  KStringRef c = KStringNewWithFormat("C");
+  KStringRef d = KStringNewWithFormat("D");
+
+  ASSERT_EQ(KListGetCount(list), 0u);
+  ASSERT_TRUE(KListAddObject(list, a));
+  ASSERT_EQ(KListGetCount(list), 1u);
+  ASSERT_TRUE(KListAddObject(list, b));
+  ASSERT_EQ(KListGetCount(list), 2u);
+  ASSERT_TRUE(KListAddObject(list, c));
+  ASSERT_EQ(KListGetCount(list), 3u);
+  ASSERT_TRUE(KListAddObject(list, d));
+  ASSERT_EQ(KListGetCount(list), 4u);
+
+  ASSERT_EQ(KListRemoveAllObjects(list), 4u);
+
+  ASSERT_EQ(KListGetCount(list), 0u);
+  ASSERT_TRUE(KListAddObject(list, a));
+  ASSERT_EQ(KListGetCount(list), 1u);
+  ASSERT_TRUE(KListAddObject(list, b));
+  ASSERT_EQ(KListGetCount(list), 2u);
+  ASSERT_TRUE(KListAddObject(list, c));
+  ASSERT_EQ(KListGetCount(list), 3u);
+  ASSERT_TRUE(KListAddObject(list, d));
+  ASSERT_EQ(KListGetCount(list), 4u);
+
+  ASSERT_EQ(KListGetObjectAtIndex(list, 0), a);
+  ASSERT_EQ(KListGetObjectAtIndex(list, 1), b);
+  ASSERT_EQ(KListGetObjectAtIndex(list, 2), c);
+  ASSERT_EQ(KListGetObjectAtIndex(list, 3), d);
+  ASSERT_EQ(KListGetObjectAtIndex(list, 4), nullptr);
+
+  {
+    KStringRef removed = (KStringRef)KListRemoveObjectAtIndex(list, 1u);
+    ASSERT_EQ(removed, b);
+    KStringRelease(removed);
+    ASSERT_EQ(KListGetObjectAtIndex(list, 0), a);
+    ASSERT_EQ(KListGetObjectAtIndex(list, 1), c);
+    ASSERT_EQ(KListGetObjectAtIndex(list, 2), d);
+    ASSERT_EQ(KListGetObjectAtIndex(list, 3), nullptr);
+    ASSERT_EQ(KListGetCount(list), 3u);
+  }
+
+  {
+    KStringRef removed = (KStringRef)KListRemoveObjectAtIndex(list, 0u);
+    ASSERT_EQ(removed, a);
+    KStringRelease(removed);
+    ASSERT_EQ(KListGetObjectAtIndex(list, 0), c);
+    ASSERT_EQ(KListGetObjectAtIndex(list, 1), d);
+    ASSERT_EQ(KListGetObjectAtIndex(list, 2), nullptr);
+    ASSERT_EQ(KListGetCount(list), 2u);
+  }
+
+  {
+    KStringRef removed = (KStringRef)KListRemoveObjectAtIndex(list, 1u);
+    ASSERT_EQ(removed, d);
+    KStringRelease(removed);
+    ASSERT_EQ(KListGetObjectAtIndex(list, 0), c);
+    ASSERT_EQ(KListGetObjectAtIndex(list, 1), nullptr);
+    ASSERT_EQ(KListGetCount(list), 1u);
+  }
+
+  KStringRelease(a);
+  KStringRelease(b);
+  KStringRelease(c);
+  KStringRelease(d);
+
+  KListRelease(list);
+}
+
 TEST(KObjectTest, KWorkerPool) {
   KWorkerPoolRef pool = KWorkerPoolNew(4u);
   ASSERT_NE(pool, nullptr);

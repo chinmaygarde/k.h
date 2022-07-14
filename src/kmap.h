@@ -3,7 +3,7 @@
 #include "kmacros.h"
 #include "kobject.h"
 
-KEXTERN_C_BEGIN
+K_EXTERN_C_BEGIN
 
 K_DEF_OBJECT(KMap);
 
@@ -24,4 +24,4 @@ double KMapGetLoadFactor(KMapRef map);
 
 size_t KMapGetMaxBucketUtilization(KMapRef map);
 
-KEXTERN_C_END
+K_EXTERN_C_END

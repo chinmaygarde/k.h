@@ -2,8 +2,8 @@
 
 #include "kmacros.h"
 
-KEXTERN_C_BEGIN
+K_EXTERN_C_BEGIN
 
 double KTimeGetCurrentSeconds();
 
-KEXTERN_C_END
+K_EXTERN_C_END

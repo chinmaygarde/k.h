@@ -31,6 +31,8 @@ add_library(kobject
   src/kcondition_variable.h
   src/khash.c
   src/khash.h
+  src/klist.c
+  src/klist.h
   src/klogging.c
   src/klogging.h
   src/kmacros.h

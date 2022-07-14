@@ -3,6 +3,7 @@
 #include "karray.h"
 #include "kassert.h"
 #include "kcondition_variable.h"
+#include "klist.h"
 #include "klogging.h"
 #include "kobject.h"
 #include "kthread.h"
@@ -42,7 +43,7 @@ void KWorkerPoolTaskExecute(KWorkerPoolTaskRef task) {
 struct KWorkerPool {
   KConditionVariableRef cv;
   KArrayRef workers;
-  KArrayRef tasks;
+  KListRef tasks;
   bool shutdown;
 };
 K_IMPL_OBJECT(KWorkerPool);
@@ -53,7 +54,7 @@ void KWorkerPoolDeInit(KWorkerPoolRef pool) {
   K_ASSERT(KWorkerPoolShutdown(pool));
   KConditionVariableRelease(pool->cv);
   KArrayRelease(pool->workers);
-  KArrayRelease(pool->tasks);
+  KListRelease(pool->tasks);
 }
 
 static void KWorkerPoolWorkerMain(KWorkerPoolRef pool) {}
@@ -65,7 +66,7 @@ KWorkerPoolRef KWorkerPoolNew(size_t worker_count) {
   }
   pool->cv = KConditionVariableNew();
   pool->workers = KArrayNew();
-  pool->tasks = KArrayNew();
+  pool->tasks = KListNew();
   for (size_t i = 0; i < worker_count; i++) {
     KThreadRef thread = KThreadNew((KThreadProc)&KWorkerPoolWorkerMain, pool);
     KArrayAddObject(pool->workers, thread);

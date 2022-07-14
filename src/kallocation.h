@@ -4,7 +4,7 @@
 #include "kobject.h"
 #include "ktypes.h"
 
-KEXTERN_C_BEGIN
+K_EXTERN_C_BEGIN
 
 K_DEF_OBJECT(KAllocation);
 
@@ -18,4 +18,4 @@ void* KAllocationGetBuffer(KAllocationRef allocation);
 
 uint32_t KAllocationNextPowerOfTwoSize(uint32_t size);
 
-KEXTERN_C_END
+K_EXTERN_C_END

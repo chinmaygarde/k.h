@@ -4,7 +4,7 @@
 #include "kobject.h"
 #include "ktypes.h"
 
-KEXTERN_C_BEGIN
+K_EXTERN_C_BEGIN
 
 bool KAutoreleasePoolAddObject(KObjectRef obj);
 
@@ -12,4 +12,4 @@ KObjectRef KAutoreleaseMove(KObjectRef obj);
 
 size_t KAutoreleasePoolPop();
 
-KEXTERN_C_END
+K_EXTERN_C_END

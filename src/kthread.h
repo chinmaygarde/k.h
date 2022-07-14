@@ -3,7 +3,7 @@
 #include "kmacros.h"
 #include "kobject.h"
 
-KEXTERN_C_BEGIN
+K_EXTERN_C_BEGIN
 
 K_DEF_OBJECT(KThread);
 
@@ -17,4 +17,4 @@ size_t KThreadGetHardwareConcurrency();
 
 void KThreadSleepSeconds(double seconds);
 
-KEXTERN_C_END
+K_EXTERN_C_END

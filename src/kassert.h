@@ -17,8 +17,8 @@
 #define K_DASSERT(...)
 #endif
 
-KEXTERN_C_BEGIN
+K_EXTERN_C_BEGIN
 
 K_NO_RETURN void KAbort();
 
-KEXTERN_C_END
+K_EXTERN_C_END
