@@ -214,8 +214,6 @@ TEST(KObjectTest, KMap) {
     KStringRef key = KStringAllocWithFormat("Key%zu", i);
     ASSERT_TRUE(KMapSetValue(map, key, value));
     KStringRelease(key);
-    K_LOG_INFO(" Added Count=%zu LoadFactor=%f", KMapGetCount(map),
-               KMapGetLoadFactor(map));
   }
   for (size_t i = 0; i < 1000; i++) {
     KStringRef key = KStringAllocWithFormat("Key%zu", i);
@@ -228,8 +226,6 @@ TEST(KObjectTest, KMap) {
     KStringRef key = KStringAllocWithFormat("Key%zu", i);
     ASSERT_TRUE(KMapRemoveValue(map, key));
     KStringRelease(key);
-    K_LOG_INFO(" Removed Count=%zu LoadFactor=%f", KMapGetCount(map),
-               KMapGetLoadFactor(map));
   }
   KMapRelease(map);
   KStringRelease(value);
