@@ -46,6 +46,8 @@ static KMapEntryRef KMapEntryAlloc(KObjectRef key, KObjectRef value) {
 /// KMap Implementation
 ///
 static const size_t kMapInitialBucketsSize = 16u;
+static const double kMapMaxLoadFactor = 1.0;
+static const size_t kMapBucketGrowthFactor = 2;
 
 K_IMPL_OBJECT(KMap);
 
@@ -53,28 +55,10 @@ struct KMap {
   KMapHash hash;
   KMapEqual equal;
   KArrayRef buckets;
-  bool is_valid;
   size_t object_count;
 };
 
-void KMapInit(KMapRef map) {
-  map->buckets = KArrayAlloc();
-  if (!map->buckets) {
-    return;
-  }
-  for (size_t i = 0; i < kMapInitialBucketsSize; i++) {
-    KArrayRef bucket = KArrayAlloc();
-    if (!bucket) {
-      return;
-    }
-    bool added = KArrayAddObject(map->buckets, bucket);
-    KArrayRelease(bucket);
-    if (!added) {
-      return;
-    }
-  }
-  map->is_valid = true;
-}
+void KMapInit(KMapRef map) {}
 
 void KMapDeInit(KMapRef map) {
   KArrayRelease(map->buckets);
@@ -86,8 +70,10 @@ static KClass KMapClass = {
     .size = sizeof(struct KMap),
 };
 
-KMapRef KMapAlloc(KMapHash hash, KMapEqual equal) {
-  if (!hash || !equal) {
+KMapRef KMapAllocWithBucketCount(KMapHash hash,
+                                 KMapEqual equal,
+                                 size_t bucket_count) {
+  if (!hash || !equal || bucket_count == 0) {
     return NULL;
   }
 
@@ -96,15 +82,34 @@ KMapRef KMapAlloc(KMapHash hash, KMapEqual equal) {
     return NULL;
   }
 
-  if (!map->is_valid) {
+  map->buckets = KArrayAlloc();
+  if (!map->buckets) {
     KMapRelease(map);
     return NULL;
+  }
+
+  for (size_t i = 0; i < bucket_count; i++) {
+    KArrayRef bucket = KArrayAlloc();
+    if (!bucket) {
+      KMapRelease(map);
+      return NULL;
+    }
+    bool added = KArrayAddObject(map->buckets, bucket);
+    KArrayRelease(bucket);
+    if (!added) {
+      KMapRelease(map);
+      return NULL;
+    }
   }
 
   map->hash = hash;
   map->equal = equal;
 
   return map;
+}
+
+KMapRef KMapAlloc(KMapHash hash, KMapEqual equal) {
+  return KMapAllocWithBucketCount(hash, equal, kMapInitialBucketsSize);
 }
 
 static KArrayRef KMapGetBucket(KMapRef map, KObjectRef key) {
@@ -117,7 +122,58 @@ static KArrayRef KMapGetBucket(KMapRef map, KObjectRef key) {
   return KArrayGetObjectAtIndex(map->buckets, index);
 }
 
-bool KMapSetValue(KMapRef map, KObjectRef key, KObjectRef value) {
+static bool KMapRehashIfNecessary(KMapRef map) {
+  if (KMapGetLoadFactor(map) < kMapMaxLoadFactor) {
+    return true;
+  }
+
+  size_t new_bucket_count =
+      KArrayGetLength(map->buckets) * kMapBucketGrowthFactor;
+
+  KMapRef new_map =
+      KMapAllocWithBucketCount(map->hash, map->equal, new_bucket_count);
+
+  if (!new_map) {
+    return false;
+  }
+
+  //----------------------------------------------------------------------------
+  /// Add existing entries to the new map.
+  ///
+  size_t iterated = 0;
+  for (size_t i = 0, bucket_count = KArrayGetLength(map->buckets);
+       i < bucket_count; i++) {
+    KArrayRef bucket = KArrayGetObjectAtIndex(map->buckets, i);
+    K_ASSERT(bucket);
+    for (size_t j = 0, entry_count = KArrayGetLength(bucket); j < entry_count;
+         j++) {
+      KMapEntryRef entry = KArrayGetObjectAtIndex(bucket, j);
+      K_ASSERT(entry);
+      if (!KMapSetValue(new_map, entry->key, entry->value)) {
+        KMapRelease(new_map);
+        return false;
+      }
+      iterated++;
+    }
+  }
+
+  K_ASSERT(KMapGetCount(map) == KMapGetCount(new_map));
+
+  //----------------------------------------------------------------------------
+  /// Swap buckets with the new map.
+  ///
+  KArrayRef temp = new_map->buckets;
+  new_map->buckets = map->buckets;
+  map->buckets = temp;
+
+  KMapRelease(new_map);
+
+  return true;
+}
+
+static bool KMapSetValueNoRehash(KMapRef map,
+                                 KObjectRef key,
+                                 KObjectRef value) {
   if (!value) {
     return false;
   }
@@ -154,6 +210,14 @@ bool KMapSetValue(KMapRef map, KObjectRef key, KObjectRef value) {
   }
 
   return false;
+}
+
+bool KMapSetValue(KMapRef map, KObjectRef key, KObjectRef value) {
+  if (!KMapSetValueNoRehash(map, key, value)) {
+    return false;
+  }
+  KMapRehashIfNecessary(map);
+  return true;
 }
 
 KObjectRef KMapGetValue(KMapRef map, KObjectRef key) {
@@ -199,4 +263,19 @@ double KMapGetLoadFactor(KMapRef map) {
     return 0u;
   }
   return (double)map->object_count / KArrayGetLength(map->buckets);
+}
+
+size_t KMapGetMaxBucketUtilization(KMapRef map) {
+  if (!map) {
+    return 0u;
+  }
+  size_t utiliation = 0u;
+  for (size_t i = 0, count = KArrayGetLength(map->buckets); i < count; i++) {
+    size_t bucket_count =
+        KArrayGetLength(KArrayGetObjectAtIndex(map->buckets, i));
+    if (bucket_count > utiliation) {
+      utiliation = bucket_count;
+    }
+  }
+  return utiliation;
 }
