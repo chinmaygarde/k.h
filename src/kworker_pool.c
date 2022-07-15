@@ -80,6 +80,9 @@ static void KWorkerPoolWorkerMain(KWorkerPoolRef pool) {
 }
 
 KWorkerPoolRef KWorkerPoolNew(size_t worker_count) {
+  if (worker_count == 0) {
+    return NULL;
+  }
   KWorkerPoolRef pool = KWorkerPoolAlloc();
   if (!pool) {
     return NULL;
