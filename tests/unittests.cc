@@ -437,10 +437,12 @@ TEST(KObjectTest, KFilePath) {
     ASSERT_TRUE(KFilePathIsAbsolute(path));
     KFilePathRelease(path);
   }
-  {
-    KFilePathRef path = KFilePathNewWithFormat("");
-    ASSERT_EQ(KFilePathCountComponents(path), 0u);
-    ASSERT_FALSE(KFilePathIsAbsolute(path));
-    KFilePathRelease(path);
-  }
+}
+
+TEST(KObjectTest, KFileHandle) {
+  KFilePathRef path = KFilePathNewWithFormat("../fixtures/hello.txt");
+  KFileHandleRef handle = KFileHandleNew(path, kFilePermissionReadOnly);
+  ASSERT_NE(handle, nullptr);
+  KFileHandleRelease(handle);
+  KFilePathRelease(path);
 }

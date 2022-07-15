@@ -8,6 +8,14 @@ K_EXTERN_C_BEGIN
 
 K_DEF_OBJECT(KFileHandle);
 
-KFileHandleRef KFileHandleNew(KFilePathRef string);
+typedef enum {
+  kFilePermissionReadOnly,
+  kFilePermissionWriteOnly,
+  kFilePermissionReadWrite,
+} KFilePermission;
+
+KFileHandleRef KFileHandleNew(KFilePathRef string, KFilePermission permission);
+
+bool KFileHandleClose(KFileHandleRef handle);
 
 K_EXTERN_C_END
