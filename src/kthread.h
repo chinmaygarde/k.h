@@ -17,4 +17,6 @@ size_t KThreadGetHardwareConcurrency();
 
 void KThreadSleepSeconds(double seconds);
 
+uint64_t KThreadGetCurrentID();
+
 K_EXTERN_C_END

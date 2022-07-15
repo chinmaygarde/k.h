@@ -29,6 +29,8 @@ add_library(kobject
   src/kautorelease.h
   src/kcondition_variable.c
   src/kcondition_variable.h
+  src/kcountdown_latch.c
+  src/kcountdown_latch.h
   src/khash.c
   src/khash.h
   src/klist.c

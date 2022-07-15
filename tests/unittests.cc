@@ -251,12 +251,14 @@ TEST(KObjectTest, KConditionVariableOne) {
             KConditionVariableNotifyOne((KConditionVariableRef)user_data));
       },
       cv);
+  ASSERT_TRUE(KConditionVariableCriticalSectionEnter(cv));
   ASSERT_TRUE(KConditionVariableWait(
       cv,
       [](void* user_data) -> bool {
         return KTimeGetCurrentSeconds() - *((double*)user_data) < kSleepTime;
       },
       &time));
+  ASSERT_TRUE(KConditionVariableCriticalSectionExit(cv));
   ASSERT_GE(KTimeGetCurrentSeconds() - time, kSleepTime);
   KConditionVariableRelease(cv);
   KThreadRelease(thread);
@@ -274,12 +276,14 @@ TEST(KObjectTest, KConditionVariableAll) {
             KConditionVariableNotifyAll((KConditionVariableRef)user_data));
       },
       cv);
+  ASSERT_TRUE(KConditionVariableCriticalSectionEnter(cv));
   ASSERT_TRUE(KConditionVariableWait(
       cv,
       [](void* user_data) -> bool {
         return KTimeGetCurrentSeconds() - *((double*)user_data) < kSleepTime;
       },
       &time));
+  ASSERT_TRUE(KConditionVariableCriticalSectionExit(cv));
   ASSERT_GE(KTimeGetCurrentSeconds() - time, kSleepTime);
   KConditionVariableRelease(cv);
   KThreadRelease(thread);
@@ -361,8 +365,21 @@ TEST(KObjectTest, KList) {
 }
 
 TEST(KObjectTest, KWorkerPool) {
-  KWorkerPoolRef pool = KWorkerPoolNew(4u);
+  const size_t kTasksCount = 1000u;
+  const size_t kWorkersCount = 8u;
+  KCountdownLatchRef latch = KCountdownLatchNew(kTasksCount);
+  KWorkerPoolRef pool = KWorkerPoolNew(kWorkersCount);
   ASSERT_NE(pool, nullptr);
-  ASSERT_EQ(KWorkerPoolGetWorkerCount(pool), 4u);
+  ASSERT_EQ(KWorkerPoolGetWorkerCount(pool), kWorkersCount);
+  for (size_t i = 0; i < kTasksCount; i++) {
+    ASSERT_TRUE(KWorkerPoolPostTask(
+        pool,
+        [](KObjectRef obj) {
+          ASSERT_TRUE(KCountDownLatchCountDown(((KCountdownLatchRef)obj)));
+        },
+        latch));
+  }
+  KCountDownLatchWait(latch);
   KWorkerPoolRelease(pool);
+  KCountdownLatchRelease(latch);
 }

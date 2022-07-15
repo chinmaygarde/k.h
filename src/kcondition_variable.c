@@ -83,9 +83,6 @@ bool KConditionVariableWait(KConditionVariableRef cv,
   if (!cv || !pred) {
     return false;
   }
-  if (!KConditionVariableCriticalSectionEnter(cv)) {
-    return false;
-  }
   bool success = false;
   do {
     if (!pred(user_data)) {
@@ -93,9 +90,6 @@ bool KConditionVariableWait(KConditionVariableRef cv,
       break;
     }
   } while (KConditionVariableWaitInternal(cv));
-  if (!KConditionVariableCriticalSectionExit(cv)) {
-    return false;
-  }
   return success;
 }
 

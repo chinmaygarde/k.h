@@ -57,7 +57,27 @@ void KWorkerPoolDeInit(KWorkerPoolRef pool) {
   KListRelease(pool->tasks);
 }
 
-static void KWorkerPoolWorkerMain(KWorkerPoolRef pool) {}
+static bool KWorkerPoolCVPredicate(void* user_data) {
+  KWorkerPoolRef pool = (KWorkerPoolRef)user_data;
+  return KListGetCount(pool->tasks) == 0 && !pool->shutdown;
+}
+
+static void KWorkerPoolWorkerMain(KWorkerPoolRef pool) {
+  bool is_running = true;
+  while (is_running) {
+    K_ASSERT(KConditionVariableCriticalSectionEnter(pool->cv));
+    if (pool->shutdown) {
+      is_running = false;
+    }
+    K_ASSERT(KConditionVariableWait(pool->cv, &KWorkerPoolCVPredicate, pool));
+    KWorkerPoolTaskRef task = KListRemoveObjectAtIndex(pool->tasks, 0u);
+    K_ASSERT(KConditionVariableCriticalSectionExit(pool->cv));
+    if (task) {
+      KWorkerPoolTaskExecute(task);
+      KWorkerPoolTaskRelease(task);
+    }
+  }
+}
 
 KWorkerPoolRef KWorkerPoolNew(size_t worker_count) {
   KWorkerPoolRef pool = KWorkerPoolAlloc();
@@ -81,8 +101,24 @@ KWorkerPoolRef KWorkerPoolNew(size_t worker_count) {
 }
 
 bool KWorkerPoolPostTask(KWorkerPoolRef pool,
-                         KWorkerPoolTask task,
-                         KObjectRef user_data);
+                         KWorkerPoolTask task_proc,
+                         KObjectRef user_data) {
+  if (!pool || !task_proc || !user_data) {
+    return false;
+  }
+
+  KWorkerPoolTaskRef task = KWorkerPoolTaskAlloc();
+  task->task = task_proc;
+  task->user_data = user_data;
+  KObjectRetain(task->user_data);
+  K_ASSERT(KConditionVariableCriticalSectionEnter(pool->cv));
+  K_ASSERT(KListAddObject(pool->tasks, task));
+  K_ASSERT(KConditionVariableCriticalSectionExit(pool->cv));
+  KWorkerPoolTaskRelease(task);
+
+  K_ASSERT(KConditionVariableNotifyOne(pool->cv));
+  return true;
+}
 
 static bool KWorkerJoinIterator(KObjectRef obj, size_t index, void* user_data) {
   KThreadJoin((KThreadRef)obj);
@@ -93,16 +129,10 @@ bool KWorkerPoolShutdown(KWorkerPoolRef pool) {
   if (!pool) {
     return false;
   }
-  if (!KConditionVariableCriticalSectionEnter(pool->cv)) {
-    return false;
-  }
+  K_ASSERT(KConditionVariableCriticalSectionEnter(pool->cv));
   pool->shutdown = true;
-  if (!KConditionVariableCriticalSectionExit(pool->cv)) {
-    return false;
-  }
-  if (!KConditionVariableNotifyAll(pool->cv)) {
-    return false;
-  }
+  K_ASSERT(KConditionVariableCriticalSectionExit(pool->cv));
+  K_ASSERT(KConditionVariableNotifyAll(pool->cv));
   KArrayIterate(pool->workers, &KWorkerJoinIterator, NULL);
   KArrayRemoveAllObjects(pool->workers);
   return true;
