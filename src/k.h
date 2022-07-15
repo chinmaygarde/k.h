@@ -16,6 +16,8 @@
 #include "karray.h"
 #include "kcondition_variable.h"
 #include "kcountdown_latch.h"
+#include "kfile_handle.h"
+#include "kfile_path.h"
 #include "klist.h"
 #include "kmap.h"
 #include "kmutex.h"

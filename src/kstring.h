@@ -13,6 +13,14 @@ KStringRef KStringNewWithFormat(const char* format, ...);
 
 KStringRef KStringNewWithFormatV(const char* format, va_list args);
 
+KStringRef KStringNewWithData(const char* data, size_t count);
+
+KStringRef KStringNew();
+
+KStringRef KStringCopy(KStringRef string);
+
+bool KStringAppend(KStringRef string, KStringRef suffix);
+
 size_t KStringGetLength(KStringRef string);
 
 const char* KStringGetData(KStringRef string);

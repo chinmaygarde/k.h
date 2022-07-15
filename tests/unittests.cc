@@ -383,3 +383,64 @@ TEST(KObjectTest, KWorkerPool) {
   KWorkerPoolRelease(pool);
   KCountdownLatchRelease(latch);
 }
+
+TEST(KObjectTest, KFilePath) {
+  {
+    KFilePathRef path = KFilePathNewWithFormat("a/b/c");
+    ASSERT_EQ(KFilePathCountComponents(path), 3u);
+    ASSERT_FALSE(KFilePathIsAbsolute(path));
+    KFilePathRelease(path);
+  }
+  {
+    KFilePathRef path = KFilePathNewWithFormat("hello");
+    ASSERT_EQ(KFilePathCountComponents(path), 1u);
+    ASSERT_FALSE(KFilePathIsAbsolute(path));
+    KFilePathRelease(path);
+  }
+  {
+    KFilePathRef path = KFilePathNewWithFormat("a/b/c/");
+    ASSERT_EQ(KFilePathCountComponents(path), 3u);
+    ASSERT_FALSE(KFilePathIsAbsolute(path));
+    KStringRef str = KFilePathNewStringRepresentationWithSeparator(path, '/');
+    KFilePathRelease(path);
+    KStringRef comparison = KStringNewWithFormat("a/b/c");
+    KStringIsEqual(str, comparison);
+    KStringRelease(comparison);
+    KStringRelease(str);
+  }
+  {
+    KFilePathRef path = KFilePathNewWithFormat("a/////b/c/");
+    ASSERT_EQ(KFilePathCountComponents(path), 3u);
+    ASSERT_FALSE(KFilePathIsAbsolute(path));
+    KStringRef str = KFilePathNewStringRepresentationWithSeparator(path, '/');
+    KFilePathRelease(path);
+    KStringRef comparison = KStringNewWithFormat("a/b/c");
+    KStringIsEqual(str, comparison);
+    KStringRelease(comparison);
+    KStringRelease(str);
+  }
+  {
+    KFilePathRef path = KFilePathNewWithFormat("a/x//y/");
+    ASSERT_EQ(KFilePathCountComponents(path), 3u);
+    ASSERT_FALSE(KFilePathIsAbsolute(path));
+    KFilePathRelease(path);
+  }
+  {
+    KFilePathRef path = KFilePathNewWithFormat("/a/b/c");
+    ASSERT_EQ(KFilePathCountComponents(path), 3u);
+    ASSERT_TRUE(KFilePathIsAbsolute(path));
+    KFilePathRelease(path);
+  }
+  {
+    KFilePathRef path = KFilePathNewWithFormat("/");
+    ASSERT_EQ(KFilePathCountComponents(path), 0u);
+    ASSERT_TRUE(KFilePathIsAbsolute(path));
+    KFilePathRelease(path);
+  }
+  {
+    KFilePathRef path = KFilePathNewWithFormat("");
+    ASSERT_EQ(KFilePathCountComponents(path), 0u);
+    ASSERT_FALSE(KFilePathIsAbsolute(path));
+    KFilePathRelease(path);
+  }
+}

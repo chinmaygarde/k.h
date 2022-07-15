@@ -31,6 +31,10 @@ add_library(kobject
   src/kcondition_variable.h
   src/kcountdown_latch.c
   src/kcountdown_latch.h
+  src/kfile_handle.c
+  src/kfile_handle.h
+  src/kfile_path.c
+  src/kfile_path.h
   src/khash.c
   src/khash.h
   src/klist.c

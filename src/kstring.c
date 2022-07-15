@@ -56,6 +56,51 @@ KStringRef KStringNewWithFormatV(const char* format, va_list args) {
   return str;
 }
 
+KStringRef KStringNewWithData(const char* data, size_t count) {
+  KStringRef str = KStringAlloc();
+  if (!str) {
+    return NULL;
+  }
+  str->size = count;
+  str->buffer = malloc(count);
+  if (count == 0 && !str->buffer) {
+    KStringRelease(str);
+    return NULL;
+  }
+  memcpy(str->buffer, data, count);
+  return str;
+}
+
+KStringRef KStringNew() {
+  return KStringNewWithData(NULL, 0);
+}
+
+KStringRef KStringCopy(KStringRef string) {
+  if (!string) {
+    return NULL;
+  }
+  return KStringNewWithData(string->buffer, string->size);
+}
+
+bool KStringAppend(KStringRef string, KStringRef suffix) {
+  if (!string || !suffix) {
+    return false;
+  }
+
+  void* realloced = realloc(string->buffer, string->size + suffix->size + 1);
+  if (!realloced) {
+    return false;
+  }
+
+  string->buffer = realloced;
+  memmove(string->buffer + string->size, suffix->buffer, suffix->size);
+  string->size += suffix->size;
+  if (string->size != 0) {
+    ((char*)string->buffer)[string->size] = '\0';
+  }
+  return true;
+}
+
 size_t KStringGetLength(KStringRef str) {
   return str->size;
 }
