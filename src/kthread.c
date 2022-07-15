@@ -1,5 +1,6 @@
 #include "kthread.h"
 
+#include "kassert.h"
 #include "klogging.h"
 #include "kplatform.h"
 #include "ktypes.h"
@@ -8,6 +9,7 @@
 #include <Windows.h>
 #else  // K_OS_WIN
 #include <pthread.h>
+#include <sys/syscall.h>
 #include <time.h>
 #include <unistd.h>
 #endif  // K_OS_WIN
@@ -167,4 +169,18 @@ static void KThreadSleepNS(size_t ns) {
 
 void KThreadSleepSeconds(double seconds) {
   KThreadSleepNS(seconds * 1e9);
+}
+
+uint64_t KThreadGetCurrentID() {
+#if K_OS_WIN
+  return GetCurrentThreadId();
+#elif K_OS_LINUX   // K_OS_WIN
+  return syscall(SYS_gettid);
+#elif K_OS_DARWIN  // K_OS_WIN
+  uint64_t id = 0;
+  K_ASSERT(pthread_threadid_np(pthread_self(), &id) == 0);
+  return id;
+#else              // K_OS_WIN
+#error Unknown platform.
+#endif  // K_OS_WIN
 }
