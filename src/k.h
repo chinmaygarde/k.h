@@ -20,6 +20,7 @@
 #include "kfile_path.h"
 #include "klist.h"
 #include "kmap.h"
+#include "kmapping.h"
 #include "kmutex.h"
 #include "kstring.h"
 #include "kthread.h"

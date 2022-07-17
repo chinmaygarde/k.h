@@ -232,7 +232,7 @@ TEST(KObjectTest, KMap) {
 
 TEST(KObjectTest, KTimeAndSleep) {
   const double kSleepTime = 0.1;
-  for (size_t i = 0; i < 5; i++) {
+  for (size_t i = 0; i < 3; i++) {
     double time = KTimeGetCurrentSeconds();
     KThreadSleepSeconds(kSleepTime);
     ASSERT_GE(KTimeGetCurrentSeconds() - time, kSleepTime);
@@ -240,7 +240,7 @@ TEST(KObjectTest, KTimeAndSleep) {
 }
 
 TEST(KObjectTest, KConditionVariableOne) {
-  static const double kSleepTime = 0.5;
+  static const double kSleepTime = 0.25;
   KConditionVariableRef cv = KConditionVariableNew();
   ASSERT_NE(cv, nullptr);
   double time = KTimeGetCurrentSeconds();
@@ -265,7 +265,7 @@ TEST(KObjectTest, KConditionVariableOne) {
 }
 
 TEST(KObjectTest, KConditionVariableAll) {
-  static const double kSleepTime = 0.5;
+  static const double kSleepTime = 0.25;
   KConditionVariableRef cv = KConditionVariableNew();
   ASSERT_NE(cv, nullptr);
   double time = KTimeGetCurrentSeconds();
@@ -443,6 +443,14 @@ TEST(KObjectTest, KFileHandle) {
   KFilePathRef path = KFilePathNewWithFormat("../fixtures/hello.txt");
   KFileHandleRef handle = KFileHandleNew(path, kFilePermissionReadOnly);
   ASSERT_NE(handle, nullptr);
+  size_t size;
+  ASSERT_TRUE(KFileHandleGetSize(handle, &size));
+  ASSERT_EQ(size, 6u);
+  KMappingRef mapping = KFileHandleNewMapping(handle, size, kMapProtectionRead);
+  ASSERT_NE(mapping, nullptr);
+  ASSERT_EQ(KMappingGetSize(mapping), 6u);
+  ASSERT_NE(KMappingGetBuffer(mapping), nullptr);
+  KMappingRelease(mapping);
   KFileHandleRelease(handle);
   KFilePathRelease(path);
 }

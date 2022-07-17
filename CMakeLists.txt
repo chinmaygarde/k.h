@@ -44,6 +44,8 @@ add_library(kobject
   src/kmacros.h
   src/kmap.c
   src/kmap.h
+  src/kmapping.c
+  src/kmapping.h
   src/kmutex.c
   src/kmutex.h
   src/kobject.c
