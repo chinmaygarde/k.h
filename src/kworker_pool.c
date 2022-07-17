@@ -106,7 +106,7 @@ KWorkerPoolRef KWorkerPoolNew(size_t worker_count) {
 bool KWorkerPoolPostTask(KWorkerPoolRef pool,
                          KWorkerPoolTask task_proc,
                          KObjectRef user_data) {
-  if (!pool || !task_proc || !user_data) {
+  if (!pool || !task_proc) {
     return false;
   }
 
