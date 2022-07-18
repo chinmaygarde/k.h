@@ -9,12 +9,12 @@ set(CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if (NOT MSVC)
-    add_compile_options(
-      -Wall
-      -Wextra
-      -Werror
-      -Wno-unused-parameter
-    )
+  add_compile_options(
+    -Wall
+    -Wextra
+    -Werror
+    -Wno-unused-parameter
+  )
 endif()
 
 add_library(kobject
