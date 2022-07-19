@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.18.2)
 
-project(kobject C CXX)
+project(kdoth C CXX)
 
 option(K_BUILD_TESTS "Build k.h unit-tests" ON)
 
@@ -17,7 +17,7 @@ if (NOT MSVC)
   )
 endif()
 
-add_library(kobject
+add_library(kdoth
   src/k.h
   src/kallocation.c
   src/kallocation.h
@@ -64,7 +64,7 @@ add_library(kobject
   src/kworker_pool.h
 )
 
-target_include_directories(kobject
+target_include_directories(kdoth
   PUBLIC
     src
 )
@@ -76,18 +76,18 @@ if(K_BUILD_TESTS)
 
   add_subdirectory(third_party/googletest)
 
-  add_executable(kobject_unittests
+  add_executable(kdoth_unittests
     tests/unittests.cc
     tests/cinclude.c
   )
 
-  target_link_libraries(kobject_unittests
+  target_link_libraries(kdoth_unittests
     PRIVATE
       gtest_main
       gtest
-      kobject
+      kdoth
   )
 
-  gtest_discover_tests(kobject_unittests)
+  gtest_discover_tests(kdoth_unittests)
 endif()
 

@@ -1,8 +1,8 @@
 {
   "build_systems": [
     {
-      "name": "KObject Build All",
-      "shell_cmd": "ninja && ./kobject_unittests",
+      "name": "KDotH Build All",
+      "shell_cmd": "ninja && ./kdoth_unittests",
       "working_dir": "${project_path}/build",
       "file_regex": "(.*):(\\d+):(\\d+)(.*)",
       "shell": true,
