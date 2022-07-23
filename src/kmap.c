@@ -2,6 +2,7 @@
 
 #include "karray.h"
 #include "kassert.h"
+#include "klist.h"
 
 //------------------------------------------------------------------------------
 /// KMapEntry Implementation
@@ -79,13 +80,13 @@ KMapRef KMapAllocWithBucketCount(KMapHash hash,
   }
 
   for (size_t i = 0; i < bucket_count; i++) {
-    KArrayRef bucket = KArrayNew();
+    KListRef bucket = KListNew();
     if (!bucket) {
       KMapRelease(map);
       return NULL;
     }
     bool added = KArrayAddObject(map->buckets, bucket);
-    KArrayRelease(bucket);
+    KListRelease(bucket);
     if (!added) {
       KMapRelease(map);
       return NULL;
@@ -102,7 +103,7 @@ KMapRef KMapNew(KMapHash hash, KMapEqual equal) {
   return KMapAllocWithBucketCount(hash, equal, kMapInitialBucketsSize);
 }
 
-static KArrayRef KMapGetBucket(KMapRef map, KObjectRef key) {
+static KListRef KMapGetBucket(KMapRef map, KObjectRef key) {
   if (!map || !key) {
     return NULL;
   }
@@ -133,11 +134,11 @@ static bool KMapRehashIfNecessary(KMapRef map) {
   size_t iterated = 0;
   for (size_t i = 0, bucket_count = KArrayGetLength(map->buckets);
        i < bucket_count; i++) {
-    KArrayRef bucket = KArrayGetObjectAtIndex(map->buckets, i);
+    KListRef bucket = KArrayGetObjectAtIndex(map->buckets, i);
     K_ASSERT(bucket);
-    for (size_t j = 0, entry_count = KArrayGetLength(bucket); j < entry_count;
+    for (size_t j = 0, entry_count = KListGetCount(bucket); j < entry_count;
          j++) {
-      KMapEntryRef entry = KArrayGetObjectAtIndex(bucket, j);
+      KMapEntryRef entry = KListGetObjectAtIndex(bucket, j);
       K_ASSERT(entry);
       if (!KMapSetValue(new_map, entry->key, entry->value)) {
         KMapRelease(new_map);
@@ -168,14 +169,14 @@ static bool KMapSetValueNoRehash(KMapRef map,
     return false;
   }
 
-  KArrayRef bucket = KMapGetBucket(map, key);
+  KListRef bucket = KMapGetBucket(map, key);
   if (!bucket) {
     return false;
   }
 
   // Look for collisions and update in place. No updates to count.
-  for (size_t i = 0, count = KArrayGetLength(bucket); i < count; i++) {
-    KMapEntryRef entry = KArrayGetObjectAtIndex(bucket, i);
+  for (size_t i = 0, count = KListGetCount(bucket); i < count; i++) {
+    KMapEntryRef entry = KListGetObjectAtIndex(bucket, i);
     K_ASSERT(entry != NULL);
     if (map->equal(key, entry->key)) {
       if (value == entry->value) {
@@ -192,7 +193,7 @@ static bool KMapSetValueNoRehash(KMapRef map,
 
   // No collisions. Update count.
   KMapEntryRef new_entry = KMapEntryNew(key, value);
-  bool added = KArrayAddObject(bucket, new_entry);
+  bool added = KListAddObject(bucket, new_entry);
   KMapEntryRelease(new_entry);
   if (added) {
     map->object_count++;
@@ -211,12 +212,12 @@ bool KMapSetValue(KMapRef map, KObjectRef key, KObjectRef value) {
 }
 
 KObjectRef KMapGetValue(KMapRef map, KObjectRef key) {
-  KArrayRef bucket = KMapGetBucket(map, key);
+  KListRef bucket = KMapGetBucket(map, key);
   if (!bucket) {
     return NULL;
   }
-  for (size_t i = 0, count = KArrayGetLength(bucket); i < count; i++) {
-    KMapEntryRef entry = KArrayGetObjectAtIndex(bucket, i);
+  for (size_t i = 0, count = KListGetCount(bucket); i < count; i++) {
+    KMapEntryRef entry = KListGetObjectAtIndex(bucket, i);
     if (map->equal(key, entry->key)) {
       return entry->value;
     }
@@ -225,16 +226,18 @@ KObjectRef KMapGetValue(KMapRef map, KObjectRef key) {
 }
 
 bool KMapRemoveValue(KMapRef map, KObjectRef key) {
-  KArrayRef bucket = KMapGetBucket(map, key);
+  KListRef bucket = KMapGetBucket(map, key);
   if (!bucket) {
     return false;
   }
-  for (size_t i = 0, count = KArrayGetLength(bucket); i < count; i++) {
-    KMapEntryRef entry = KArrayGetObjectAtIndex(bucket, i);
+  for (size_t i = 0, count = KListGetCount(bucket); i < count; i++) {
+    KMapEntryRef entry = KListGetObjectAtIndex(bucket, i);
     if (map->equal(key, entry->key)) {
-      if (KArrayRemoveObjectAtIndex(bucket, i)) {
+      if (KListRemoveObjectAtIndex(bucket, i)) {
         map->object_count--;
         return true;
+      } else {
+        return false;
       }
     }
   }
@@ -262,7 +265,7 @@ size_t KMapGetMaxBucketUtilization(KMapRef map) {
   size_t utiliation = 0u;
   for (size_t i = 0, count = KArrayGetLength(map->buckets); i < count; i++) {
     size_t bucket_count =
-        KArrayGetLength(KArrayGetObjectAtIndex(map->buckets, i));
+        KListGetCount(KArrayGetObjectAtIndex(map->buckets, i));
     if (bucket_count > utiliation) {
       utiliation = bucket_count;
     }
