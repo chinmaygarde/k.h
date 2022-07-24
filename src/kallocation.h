@@ -6,6 +6,9 @@
 
 K_EXTERN_C_BEGIN
 
+//------------------------------------------------------------------------------
+/// Represents a contiguous allocation.
+///
 K_DEF_OBJECT(KAllocation);
 
 KAllocationRef KAllocationNew();
