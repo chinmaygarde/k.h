@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.18.2)
 
 project(kdoth C CXX)
 
-option(K_BUILD_TESTS "Build k.h unit-tests" ON)
+option(K_BUILD_TESTS "Build k.h unit-tests" OFF)
 
 set(C_STANDARD 11)
 set(CXX_STANDARD 17)
