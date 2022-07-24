@@ -2,7 +2,7 @@
   "build_systems": [
     {
       "name": "KDotH Build All",
-      "shell_cmd": "ninja && kdoth_unittests",
+      "shell_cmd": "ninja && ctest",
       "working_dir": "${project_path}/build",
       "file_regex": "(.*):(\\d+):(\\d+)(.*)",
       "shell": true,

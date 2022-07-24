@@ -93,7 +93,8 @@ bool KStringAppend(KStringRef string, KStringRef suffix) {
   }
 
   string->buffer = realloced;
-  memmove(string->buffer + string->size, suffix->buffer, suffix->size);
+  memmove((uint8_t*)string->buffer + string->size, suffix->buffer,
+          suffix->size);
   string->size += suffix->size;
   if (string->size != 0) {
     ((char*)string->buffer)[string->size] = '\0';
