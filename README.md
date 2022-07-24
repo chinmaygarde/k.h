@@ -24,12 +24,49 @@ In your C/C++ translation unit, include `k.h`
 
 # Reference
 
-## Object
+## Objects
 
-All object are thread-safe reference-counted. Methods with `New` or `Copy` in
-their names return a +1 out reference. This reference must be explicitly
-released either via `KObjectRelease` or a typed wrapper the same (such as
-`KStringRelease` or `KArrayRelease`).
+All objects are thread-safe reference-counted. Methods with `New`, `Alloc`, or
+`Copy` in their names return a +1 out reference. This reference must be
+explicitly released either via `KObjectRelease` or a typed wrapper the same
+(such as `KStringRelease` or `KArrayRelease`).
 
 References to objects can be added via `KObjectRetain`. Most object also define
 typed wrappers to this method (such as `KStringRetain` or `KArrayRetain`).
+
+### Defining Objects
+
+To create your own objects, first define them in a header using the
+`K_DEF_OBJECT` macro in a header:
+
+```
+K_DEF_OBJECT(Foo);
+```
+
+This implicitly defined the objects `Alloc` method along with typed `Retain` and
+`Release` variants for the object. Effectively, the following new methods are
+declared.
+
+```
+FooRef FooAlloc();
+void FooRetain(FoorRef foo);
+void FooRelease(FoorRef foo);
+```
+
+Then, in an implementation file, add an implementation for the object using
+`K_IMPL_OBJECT` along with its `struct` and `Init` and `DeInit` methods.
+
+```
+struct Foo {
+ // Whatever is part of the object.
+};
+K_IMPL_OBJECT(Foo);
+void FooInit(FooRef foo) {
+  // Called after each instance of foo is allocated. This is the object
+  // "constructor".
+}
+void FooDeInit(FoorRef foo) {
+  // Called before each instead of foo is deallocated. This is the object
+  // "destructor".
+}
+```
