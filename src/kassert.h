@@ -3,12 +3,20 @@
 #include "klogging.h"
 #include "kmacros.h"
 
-#define K_ASSERT(x)                             \
-  {                                             \
-    if (!(x)) {                                 \
-      K_LOG_ERROR("Assertion failed '" #x "'"); \
-      KAbort();                                 \
-    }                                           \
+//------------------------------------------------------------------------------
+/// @brief      Asserts that the condition is true. If not, log a message and
+///             abort the process.
+///
+/// @param      condition     The condition to verify.
+///
+/// @return     { description_of_the_return_value }
+///
+#define K_ASSERT(condition)                             \
+  {                                                     \
+    if (!(condition)) {                                 \
+      K_LOG_ERROR("Assertion failed '" #condition "'"); \
+      KAbort();                                         \
+    }                                                   \
   }
 
 #ifndef NDEBUG
@@ -19,6 +27,9 @@
 
 K_EXTERN_C_BEGIN
 
+//------------------------------------------------------------------------------
+/// @brief      Abort the process.
+///
 K_NO_RETURN void KAbort();
 
 K_EXTERN_C_END
