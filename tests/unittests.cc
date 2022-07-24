@@ -440,15 +440,15 @@ TEST(KObjectTest, KFilePath) {
 }
 
 TEST(KObjectTest, KFileHandle) {
-  KFilePathRef path = KFilePathNewWithFormat("../fixtures/hello.txt");
+  KFilePathRef path = KFilePathNewWithFormat("../fixtures/image.jpg");
   KFileHandleRef handle = KFileHandleNew(path, kFilePermissionReadOnly);
   ASSERT_NE(handle, nullptr);
   size_t size;
   ASSERT_TRUE(KFileHandleGetSize(handle, &size));
-  ASSERT_EQ(size, 6u);
+  ASSERT_EQ(size, 115292u);
   KMappingRef mapping = KFileHandleNewMapping(handle, size, kMapProtectionRead);
   ASSERT_NE(mapping, nullptr);
-  ASSERT_EQ(KMappingGetSize(mapping), 6u);
+  ASSERT_EQ(KMappingGetSize(mapping), 115292u);
   ASSERT_NE(KMappingGetBuffer(mapping), nullptr);
   KMappingRelease(mapping);
   KFileHandleRelease(handle);
