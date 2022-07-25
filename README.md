@@ -70,3 +70,50 @@ void FooDeInit(FoorRef foo) {
   // "destructor".
 }
 ```
+
+## Platform detection.
+
+Macros for detecting the platforms is are in `kplatform.h`. These include macros
+like `K_OS_DARWIN`, `K_OS_WIN`, etc..
+
+## Synchronization
+
+* KConditionVariableRef: Condition variables.
+* KCountdownLatchRef: Count down latches for waiting on the completion of a
+  certain number of jobs.
+* KSemaphoreRef: A counting semaphore.
+* KMutexRef: A binary semaphore.
+
+## Threading
+
+* KThreadRef: An OS thread.
+* KTimeRef: Get the monotonic from the system monotonic clock.
+* KWorkerPoolRef: A pool of worker threads.
+
+## Filesystem
+
+* KFileHandleRef: A native file handle.
+* KFilePathRef: A native file path.
+
+## Logging
+
+Utilities for logging such as K_LOG_INFO, K_LOG_WARNING, and K_LOG_ERROR.
+
+## Utilities
+
+* KAllocationRef: A contiguous allocation.
+* Assertions: Macros like `K_ASSERT` and `K_DASSERT`.
+* KAutoreleaseRef: A thread-local pool or auto-released objects. Not used
+  internally by the library.
+* KHashRef: Hashing utilities.
+* KMappingRef: A pair of buffer pointer and buffer size. Used by other utilities
+  to present a unified view of mappings.
+
+## Collections
+
+A collections hold a strong reference to the objects in them.
+
+* KArrayRef: A contiguous array of objects.
+* KListRef: A linked list of objects.
+* KMapRef: A hash map.
+* KStringRef: A C-string.

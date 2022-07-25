@@ -1,28 +1,60 @@
 #pragma once
 
+//------------------------------------------------------------------------------
+/// Base include.
+///
+#include "kmacros.h"
 #include "ktypes.h"
 
-#include "kmacros.h"
+//------------------------------------------------------------------------------
+/// Platform detection.
+///
 #include "kplatform.h"
 
-#include "kassert.h"
-#include "khash.h"
-#include "klogging.h"
-
-#include "kautorelease.h"
+//------------------------------------------------------------------------------
+/// Thread-safe reference counted objects.
+///
 #include "kobject.h"
 
-#include "kallocation.h"
-#include "karray.h"
+//------------------------------------------------------------------------------
+/// Synchronization
+///
 #include "kcondition_variable.h"
 #include "kcountdown_latch.h"
-#include "kfile_handle.h"
-#include "kfile_path.h"
-#include "klist.h"
-#include "kmap.h"
-#include "kmapping.h"
 #include "kmutex.h"
-#include "kstring.h"
+#include "ksemaphore.h"
+
+//------------------------------------------------------------------------------
+/// Threading
+///
 #include "kthread.h"
 #include "ktime.h"
 #include "kworker_pool.h"
+
+//------------------------------------------------------------------------------
+/// Filesystem
+///
+#include "kfile_handle.h"
+#include "kfile_path.h"
+
+//------------------------------------------------------------------------------
+/// Logging
+///
+#include "klogging.h"
+
+//------------------------------------------------------------------------------
+/// Utilities
+///
+#include "kallocation.h"
+#include "kassert.h"
+#include "kautorelease.h"
+#include "khash.h"
+#include "kmapping.h"
+
+//------------------------------------------------------------------------------
+/// Collections
+///
+#include "karray.h"
+#include "klist.h"
+#include "kmap.h"
+#include "kstring.h"
