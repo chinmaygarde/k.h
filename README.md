@@ -87,7 +87,7 @@ like `K_OS_DARWIN`, `K_OS_WIN`, etc..
 ## Threading
 
 * **KThreadRef**: An OS thread.
-* Timing: Get the monotonic from the system monotonic clock.
+* Timing: Get the monotonic from the system high-resolution clock.
 * **KWorkerPoolRef**: A pool of worker threads.
 
 ## Filesystem
@@ -97,7 +97,7 @@ like `K_OS_DARWIN`, `K_OS_WIN`, etc..
 
 ## Logging
 
-Utilities for logging such as K_LOG_INFO, K_LOG_WARNING, and K_LOG_ERROR.
+Utilities for logging such as `K_LOG_INFO`, `K_LOG_WARNING`, and `K_LOG_ERROR`.
 
 ## Utilities
 
