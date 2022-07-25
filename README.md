@@ -106,8 +106,8 @@ Utilities for logging such as `K_LOG_INFO`, `K_LOG_WARNING`, and `K_LOG_ERROR`.
 * **KAutoreleaseRef**: A thread-local pool or auto-released objects. Not used
   internally by the library.
 * **KHashRef**: Hashing utilities.
-* **KMappingRef**: A pair of buffer pointer and buffer size. Used by other utilities
-  to present a unified view of mappings.
+* **KMappingRef**: A pair of buffer pointer and buffer size. Used by other
+  utilities to present a unified view of mappings.
 
 ## Collections
 
