@@ -71,7 +71,7 @@ void FooDeInit(FoorRef foo) {
 }
 ```
 
-## Platform detection.
+## Platform Detection
 
 Macros for detecting the platforms is are in `kplatform.h`. These include macros
 like `K_OS_DARWIN`, `K_OS_WIN`, etc..
