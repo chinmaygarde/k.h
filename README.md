@@ -99,6 +99,10 @@ like `K_OS_DARWIN`, `K_OS_WIN`, etc..
 
 Utilities for logging such as `K_LOG_INFO`, `K_LOG_WARNING`, and `K_LOG_ERROR`.
 
+The variants with `D` in them only log in debug (`!defined(NDEBUG)`) modes. These
+are `K_DLOG_INFO`, `K_DLOG_WARNING`, and `K_DLOG_ERROR`.
+
+
 ## Utilities
 
 * **KAllocationRef**: A contiguous allocation.
