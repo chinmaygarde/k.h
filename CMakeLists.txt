@@ -53,6 +53,8 @@ add_library(kdoth
   src/kplatform.h
   src/ksemaphore.c
   src/ksemaphore.h
+  src/kset.c
+  src/kset.h
   src/kstring.c
   src/kstring.h
   src/kthread.c

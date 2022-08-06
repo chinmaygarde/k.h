@@ -230,6 +230,50 @@ TEST(KObjectTest, KMap) {
   KStringRelease(value);
 }
 
+TEST(KObjectTest, KSet) {
+  KSetRef set = KSetNew((KSetHash)&KStringGetHash, (KSetEqual)&KStringIsEqual);
+  ASSERT_EQ(KSetGetCount(set), 0u);
+  for (size_t i = 0; i < 1000; i++) {
+    KStringRef value = KStringNewWithFormat("Key%zu", i);
+    ASSERT_TRUE(KSetInsert(set, value));
+    KStringRelease(value);
+  }
+  ASSERT_EQ(KSetGetCount(set), 1000u);
+  for (size_t i = 0; i < 1000; i++) {
+    KStringRef value = KStringNewWithFormat("Key%zu", i);
+    ASSERT_TRUE(KSetContains(set, value));
+    KStringRelease(value);
+  }
+  ASSERT_EQ(KSetGetCount(set), 1000u);
+  for (size_t i = 1000; i < 2000; i++) {
+    KStringRef value = KStringNewWithFormat("Key%zu", i);
+    ASSERT_FALSE(KSetContains(set, value));
+    KStringRelease(value);
+  }
+  ASSERT_EQ(KSetGetCount(set), 1000u);
+  for (size_t i = 1000; i < 2000; i++) {
+    KStringRef value = KStringNewWithFormat("Key%zu", i);
+    ASSERT_FALSE(KSetErase(set, value));
+    KStringRelease(value);
+  }
+  ASSERT_EQ(KSetGetCount(set), 1000u);
+  for (size_t i = 0; i < 1000; i++) {
+    KStringRef value = KStringNewWithFormat("Key%zu", i);
+    ASSERT_TRUE(KSetErase(set, value));
+    KStringRelease(value);
+  }
+  ASSERT_EQ(KSetGetCount(set), 0u);
+  for (size_t i = 0; i < 1000; i++) {
+    KStringRef value = KStringNewWithFormat("Key%zu", i);
+    ASSERT_TRUE(KSetInsert(set, value));
+    KStringRelease(value);
+  }
+  ASSERT_EQ(KSetGetCount(set), 1000u);
+  ASSERT_TRUE(KSetClear(set));
+  ASSERT_EQ(KSetGetCount(set), 0u);
+  KSetRelease(set);
+}
+
 TEST(KObjectTest, KTimeAndSleep) {
   const double kSleepTime = 0.1;
   for (size_t i = 0; i < 3; i++) {

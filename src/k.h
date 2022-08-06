@@ -57,4 +57,5 @@
 #include "karray.h"
 #include "klist.h"
 #include "kmap.h"
+#include "kset.h"
 #include "kstring.h"
