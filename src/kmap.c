@@ -131,7 +131,6 @@ static bool KMapRehashIfNecessary(KMapRef map) {
   //----------------------------------------------------------------------------
   /// Add existing entries to the new map.
   ///
-  size_t iterated = 0;
   for (size_t i = 0, bucket_count = KArrayGetLength(map->buckets);
        i < bucket_count; i++) {
     KListRef bucket = KArrayGetObjectAtIndex(map->buckets, i);
@@ -144,7 +143,6 @@ static bool KMapRehashIfNecessary(KMapRef map) {
         KMapRelease(new_map);
         return false;
       }
-      iterated++;
     }
   }
 
